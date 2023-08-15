@@ -1,0 +1,1471 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Explore\_bikeshare\_data}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{explore-bike-share-data}{%
+\subsubsection{Explore Bike Share Data}\label{explore-bike-share-data}}
+
+For this project, your goal is to ask and answer three questions about
+the available bikeshare data from Washington, Chicago, and New York.
+This notebook can be submitted directly through the workspace when you
+are confident in your results.
+
+You will be graded against the project
+\href{https://review.udacity.com/\#!/rubrics/2508/view}{Rubric} by a
+mentor after you have submitted. To get you started, you can use the
+template below, but feel free to be creative in your solutions!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nf}{library}\PY{p}{(}\PY{n}{ggplot2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{ny} \PY{o}{=} \PY{n+nf}{read.csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{new\PYZus{}york\PYZus{}city.csv\PYZsq{}}\PY{p}{)}
+        \PY{n}{wash} \PY{o}{=} \PY{n+nf}{read.csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{washington.csv\PYZsq{}}\PY{p}{)}
+        \PY{n}{chi} \PY{o}{=} \PY{n+nf}{read.csv}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{chicago.csv\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nf}{head}\PY{p}{(}\PY{n}{ny}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year\\
+\hline
+	 5688089                   & 2017-06-11 14:55:05       & 2017-06-11 15:08:21       &  795                      & Suffolk St \& Stanton St & W Broadway \& Spring St  & Subscriber                & Male                      & 1998                     \\
+	 4096714                   & 2017-05-11 15:30:11       & 2017-05-11 15:41:43       &  692                      & Lexington Ave \& E 63 St & 1 Ave \& E 78 St         & Subscriber                & Male                      & 1981                     \\
+	 2173887                   & 2017-03-29 13:26:26       & 2017-03-29 13:48:31       & 1325                      & 1 Pl \& Clinton St       & Henry St \& Degraw St    & Subscriber                & Male                      & 1987                     \\
+	 3945638                   & 2017-05-08 19:47:18       & 2017-05-08 19:59:01       &  703                      & Barrow St \& Hudson St   & W 20 St \& 8 Ave         & Subscriber                & Female                    & 1986                     \\
+	 6208972                   & 2017-06-21 07:49:16       & 2017-06-21 07:54:46       &  329                      & 1 Ave \& E 44 St         & E 53 St \& 3 Ave         & Subscriber                & Male                      & 1992                     \\
+	 1285652                   & 2017-02-22 18:55:24       & 2017-02-22 19:12:03       &  998                      & State St \& Smith St     & Bond St \& Fulton St     & Subscriber                & Male                      & 1986                     \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{c+c1}{\PYZsh{}Visualizing a small subset sample to identify any patterns/missing data}
+         \PY{n+nf}{sample}\PY{p}{(}\PY{n}{ny}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllll}
+ months & Gender & End.Station & Start.Time & Birth.Year & Trip.Duration & User.Type & Start.Station & X & End.Time\\
+\hline
+	 Jun                              & Male                             & W Broadway \& Spring St         & 2017-06-11 14:55:05              & 1998                             &  795                             & Subscriber                       & Suffolk St \& Stanton St        & 5688089                          & 2017-06-11 15:08:21             \\
+	 May                              & Male                             & 1 Ave \& E 78 St                & 2017-05-11 15:30:11              & 1981                             &  692                             & Subscriber                       & Lexington Ave \& E 63 St        & 4096714                          & 2017-05-11 15:41:43             \\
+	 Mar                              & Male                             & Henry St \& Degraw St           & 2017-03-29 13:26:26              & 1987                             & 1325                             & Subscriber                       & 1 Pl \& Clinton St              & 2173887                          & 2017-03-29 13:48:31             \\
+	 May                              & Female                           & W 20 St \& 8 Ave                & 2017-05-08 19:47:18              & 1986                             &  703                             & Subscriber                       & Barrow St \& Hudson St          & 3945638                          & 2017-05-08 19:59:01             \\
+	 Jun                              & Male                             & E 53 St \& 3 Ave                & 2017-06-21 07:49:16              & 1992                             &  329                             & Subscriber                       & 1 Ave \& E 44 St                & 6208972                          & 2017-06-21 07:54:46             \\
+	 Feb                              & Male                             & Bond St \& Fulton St            & 2017-02-22 18:55:24              & 1986                             &  998                             & Subscriber                       & State St \& Smith St            & 1285652                          & 2017-02-22 19:12:03             \\
+	 Mar                              & Male                             & Lafayette Ave \& Fort Greene Pl & 2017-03-06 16:22:53              & 1982                             &  478                             & Subscriber                       & Front St \& Gold St             & 1675753                          & 2017-03-06 16:30:51             \\
+	 Mar                              & Male                             & Broadway \& Battery Pl          & 2017-03-07 07:42:24              & 1984                             & 4038                             & Subscriber                       & E 89 St \& York Ave             & 1692245                          & 2017-03-07 08:49:42             \\
+	 Apr                              &                                  & Central Park S \& 6 Ave         & 2017-04-02 08:02:36              &   NA                             & 5132                             & Customer                         & Central Park S \& 6 Ave         & 2271331                          & 2017-04-02 09:28:08             \\
+	 Mar                              & Male                             & E 25 St \& 2 Ave                & 2017-03-01 23:01:31              & 1992                             &  309                             & Subscriber                       & E 3 St \& 1 Ave                 & 1558339                          & 2017-03-01 23:06:41             \\
+	 Apr                              &                                  & Little West St \& 1 Pl          & 2017-04-02 14:37:20              &   NA                             & 1131                             & Customer                         & Bank St \& Washington St        & 2287178                          & 2017-04-02 14:56:12             \\
+	 Apr                              & Male                             & Liberty St \& Broadway          & 2017-04-13 13:40:39              & 1955                             &  319                             & Subscriber                       & Front St \& Maiden Ln           & 2744874                          & 2017-04-13 13:45:59             \\
+	 Apr                              & Male                             & Columbus Ave \& W 72 St         & 2017-04-27 23:27:31              & 1971                             & 2301                             & Subscriber                       & E 10 St \& 5 Ave                & 3398180                          & 2017-04-28 00:05:53             \\
+	 Feb                              & Male                             & E 47 St \& Park Ave             & 2017-02-13 15:40:53              & 1993                             & 1172                             & Subscriber                       & 1 Ave \& E 68 St                &  991609                          & 2017-02-13 16:00:26             \\
+	 Feb                              & Male                             & Bushwick Ave \& Powers St       & 2017-02-28 19:26:43              & 1983                             &  518                             & Subscriber                       & N 11 St \& Wythe Ave            & 1512596                          & 2017-02-28 19:35:21             \\
+	 Jan                              & Male                             & W 17 St \& 8 Ave                & 2017-01-11 11:30:30              & 1972                             &  285                             & Subscriber                       & E 17 St \& Broadway             &  187466                          & 2017-01-11 11:35:15             \\
+	 Mar                              & Male                             & Johnson St \& Gold St           & 2017-03-29 20:19:44              & 1982                             &  263                             & Subscriber                       & State St \& Smith St            & 2195658                          & 2017-03-29 20:24:07             \\
+	 Jun                              & Female                           & E 11 St \& 2 Ave                & 2017-06-23 21:21:59              & 1997                             &  525                             & Subscriber                       & E 2 St \& Avenue C              & 6388534                          & 2017-06-23 21:30:45             \\
+	 May                              & Male                             & E 72 St \& York Ave             & 2017-05-24 08:53:32              & 1979                             &  658                             & Subscriber                       & Central Park West \& W 76 St    & 4733837                          & 2017-05-24 09:04:30             \\
+	 Jan                              &                                  & W 45 St \& 6 Ave                & 2017-01-01 13:32:39              &   NA                             & 1038                             & Customer                         & W 22 St \& 8 Ave                &    5857                          & 2017-01-01 13:49:57             \\
+	 Feb                              & Male                             & 1 Ave \& E 68 St                & 2017-02-18 13:29:08              & 1983                             &   82                             & Subscriber                       & E 71 St \& 1 Ave                & 1132766                          & 2017-02-18 13:30:31             \\
+	 Apr                              & Male                             & Washington Pl \& Broadway       & 2017-04-27 09:44:35              & 1988                             &  204                             & Subscriber                       & University Pl \& E 14 St        & 3358474                          & 2017-04-27 09:48:00             \\
+	 Mar                              & Female                           & Suffolk St \& Stanton St        & 2017-03-09 11:15:39              & 1978                             &  803                             & Subscriber                       & E 25 St \& 2 Ave                & 1778858                          & 2017-03-09 11:29:03             \\
+	 Apr                              &                                  & Plaza St West \& Flatbush Ave   & 2017-04-08 13:39:48              &   NA                             & 1476                             & Customer                         & Dean St \& Hoyt St              & 2497952                          & 2017-04-08 14:04:24             \\
+	 Apr                              & Male                             & Mott St \& Prince St            & 2017-04-16 17:36:06              & 1983                             & 1605                             & Subscriber                       & Allen St \& Stanton St          & 2905932                          & 2017-04-16 18:02:52             \\
+	 Apr                              & Female                           & 1 Ave \& E 68 St                & 2017-04-21 09:41:14              & 1965                             &  441                             & Subscriber                       & Lexington Ave \& E 63 St        & 3123311                          & 2017-04-21 09:48:36             \\
+	 Apr                              & Male                             & Columbia St \& Degraw St        & 2017-04-17 18:27:23              & 1975                             & 1750                             & Subscriber                       & NYCBS Depot - SSP                & 2959550                          & 2017-04-17 18:56:33             \\
+	 Mar                              & Female                           & W 38 St \& 8 Ave                & 2017-03-25 12:02:11              & 1960                             &  393                             & Subscriber                       & W 26 St \& 8 Ave                & 2067887                          & 2017-03-25 12:08:44             \\
+	 Apr                              & Male                             & Mott St \& Prince St            & 2017-04-29 23:58:44              & 1986                             &  215                             & Subscriber                       & Great Jones St                   & 3518426                          & 2017-04-30 00:02:19             \\
+	 Jun                              & Male                             & 9 Ave \& W 45 St                & 2017-06-06 11:23:30              & 1951                             &  205                             & Subscriber                       & W 43 St \& 10 Ave               & 5383277                          & 2017-06-06 11:26:56             \\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	 May                           & Male                          & 3 St \& Prospect Park West   & 2017-05-14 13:58:01           & 1985                          & 2496                          & Subscriber                    & S 3 St \& Bedford Ave        & 4203558                       & 2017-05-14 14:39:38          \\
+	 Jun                           & Male                          & Greenwich St \& Hubert St    & 2017-06-05 17:44:35           & 1968                          &  249                          & Subscriber                    & Vesey Pl \& River Terrace    & 5352804                       & 2017-06-05 17:48:44          \\
+	 Apr                           & Male                          & Little West St \& 1 Pl       & 2017-04-30 12:22:15           & 1957                          & 1420                          & Subscriber                    & Barrow St \& Hudson St       & 3532080                       & 2017-04-30 12:45:56          \\
+	 Apr                           & Male                          & W 15 St \& 7 Ave             & 2017-04-17 11:50:15           & 1950                          &  533                          & Subscriber                    & 9 Ave \& W 28 St             & 2935863                       & 2017-04-17 11:59:08          \\
+	 Jun                           & Male                          & W 21 St \& 6 Ave             & 2017-06-20 11:06:16           & 1987                          &  383                          & Subscriber                    & 9 Ave \& W 18 St             & 6156169                       & 2017-06-20 11:12:40          \\
+	 Jan                           & Male                          & Centre St \& Worth St        & 2017-01-13 07:37:50           & 1958                          &  386                          & Subscriber                    & Maiden Ln \& Pearl St        &  250989                       & 2017-01-13 07:44:16          \\
+	 Feb                           & Male                          & Vesey Pl \& River Terrace    & 2017-02-22 16:00:25           & 1981                          &  315                          & Subscriber                    & Greenwich St \& Hubert St    & 1275463                       & 2017-02-22 16:05:41          \\
+	 Apr                           & Male                          & E 3 St \& 1 Ave              & 2017-04-22 10:03:26           & 1960                          &  226                          & Subscriber                    & E 10 St \& Avenue A          & 3161273                       & 2017-04-22 10:07:12          \\
+	 May                           & Female                        & S 3 St \& Bedford Ave        & 2017-05-14 16:18:42           & 1991                          & 1001                          & Subscriber                    & Scholes St \& Manhattan Ave  & 4211314                       & 2017-05-14 16:35:23          \\
+	 Mar                           & Female                        & Greenwich Ave \& 8 Ave       & 2017-03-07 21:15:14           & 1980                          &  682                          & Subscriber                    & Lexington Ave \& E 24 St     & 1717314                       & 2017-03-07 21:26:37          \\
+	 Mar                           & Female                        & Canal St \& Rutgers St       & 2017-03-13 21:21:15           & 1990                          &  978                          & Subscriber                    & 1 Ave \& E 16 St             & 1881529                       & 2017-03-13 21:37:33          \\
+	 Feb                           & Male                          & W 33 St \& 7 Ave             & 2017-02-15 13:40:07           & 1990                          &  420                          & Subscriber                    & E 30 St \& Park Ave S        & 1047928                       & 2017-02-15 13:47:07          \\
+	 Jun                           & Male                          & 12 Ave \& W 40 St            & 2017-06-10 12:31:08           & 1978                          & 1549                          & Subscriber                    & West End Ave \& W 94 St      & 5623210                       & 2017-06-10 12:56:57          \\
+	 Apr                           & Male                          & Broadway \& E 22 St          & 2017-04-23 10:54:11           & 1974                          &  306                          & Subscriber                    & W 20 St \& 8 Ave             & 3197884                       & 2017-04-23 10:59:17          \\
+	 Jun                           & Female                        & W 16 St \& The High Line     & 2017-06-12 18:45:44           & 1981                          & 1623                          & Subscriber                    & W 16 St \& The High Line     & 5758780                       & 2017-06-12 19:12:48          \\
+	 May                           & Male                          & Great Jones St                & 2017-05-31 22:00:22           & 1991                          &  221                          & Subscriber                    & Sullivan St \& Washington Sq & 5082390                       & 2017-05-31 22:04:03          \\
+	 Apr                           & Male                          & Amsterdam Ave \& W 79 St     & 2017-04-09 07:34:19           & 1978                          & 1238                          & Subscriber                    & 5 Ave \& E 88 St             & 2521938                       & 2017-04-09 07:54:57          \\
+	 May                           & Female                        & E 17 St \& Broadway          & 2017-05-04 12:03:54           & 1964                          &  655                          & Subscriber                    & Broadway \& W 36 St          & 3759176                       & 2017-05-04 12:14:50          \\
+	 Jan                          & Male                         & Franklin St \& W Broadway   & 2017-01-12 21:42:18          & 1965                         &  536                         & Subscriber                   & Pier 40 - Hudson River Park  &  246004                      & 2017-01-12 21:51:14         \\
+	 Mar                           & Male                          & W 31 St \& 7 Ave             & 2017-03-21 16:27:03           & 1976                          &  841                          & Subscriber                    & 6 Ave \& Canal St            & 1951636                       & 2017-03-21 16:41:04          \\
+	 Jun                           & Male                          & South End Ave \& Liberty St  & 2017-06-21 12:44:04           & 1982                          & 1505                          & Subscriber                    & W 49 St \& 8 Ave             & 6227477                       & 2017-06-21 13:09:09          \\
+	 Jun                           & Male                          & South End Ave \& Liberty St  & 2017-06-22 17:09:31           & 1976                          &  514                          & Subscriber                    & Barclay St \& Church St      & 6309606                       & 2017-06-22 17:18:06          \\
+	 Jun                           & Male                          & E 12 St \& 3 Ave             & 2017-06-08 19:59:16           & 1982                          &  451                          & Subscriber                    & Broadway \& E 22 St          & 5532367                       & 2017-06-08 20:06:48          \\
+	 Jun                           & Male                          & W 47 St \& 10 Ave            & 2017-06-08 17:29:01           & 1980                          &  408                          & Subscriber                    & Broadway \& W 41 St          & 5517974                       & 2017-06-08 17:35:50          \\
+	 Feb                           & Male                          & E 47 St \& Park Ave          & 2017-02-23 06:14:14           & 1984                          &  558                          & Subscriber                    & E 27 St \& 1 Ave             & 1293888                       & 2017-02-23 06:23:32          \\
+	 Jan                           & Male                          & 9 Ave \& W 45 St             & 2017-01-28 16:44:18           & 1991                          &  240                          & Subscriber                    & W 52 St \& 9 Ave             &  642855                       & 2017-01-28 16:48:18          \\
+	 Mar                           & Male                          & W 87 St  \& Amsterdam Ave    & 2017-03-29 06:30:35           & 1984                          &  125                          & Subscriber                    & W 84 St \& Columbus Ave      & 2157959                       & 2017-03-29 06:32:41          \\
+	 Jun                           & Male                          & W 45 St \& 8 Ave             & 2017-06-11 12:52:27           & 1954                          &  367                          & Subscriber                    & 8 Ave \& W 33 St             & 5679624                       & 2017-06-11 12:58:35          \\
+	 Jun                           & Male                          & Broadway \& W 51 St          & 2017-06-30 07:48:34           & 1974                          & 1722                          & Subscriber                    & Cathedral Pkwy \& Broadway   & 6762960                       & 2017-06-30 08:17:16          \\
+	 Jun                         &                             &                             & 2017-06-18 16:20:21         &   NA                        &   NA                        &                             &                             & 6078570                     & 201                        \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{}Checking for null values}
+         \PY{n+nf}{apply}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{ny}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{,} \PY{n}{sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[X] 0
+\item[Start.Time] 0
+\item[End.Time] 0
+\item[Trip.Duration] 1
+\item[Start.Station] 0
+\item[End.Station] 0
+\item[User.Type] 0
+\item[Gender] 0
+\item[Birth.Year] 5218
+\item[months] 0
+\end{description*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{}Checking for null values}
+         \PY{n}{ny} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} \PY{n+nf}{summarise\PYZus{}all}\PY{p}{(}\PY{n+nf}{funs}\PY{p}{(}\PY{n+nf}{sum}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{.)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year & months\\
+\hline
+	 0    & 0    & 0    & 1    & 0    & 0    & 0    & 0    & 5218 & 0   \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n+nf}{head}\PY{p}{(}\PY{n}{wash}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type\\
+\hline
+	 1621326                                               & 2017-06-21 08:36:34                                   & 2017-06-21 08:44:43                                   &  489.066                                              & 14th \& Belmont St NW                                & 15th \& K St NW                                      & Subscriber                                           \\
+	  482740                                               & 2017-03-11 10:40:00                                   & 2017-03-11 10:46:00                                   &  402.549                                              & Yuma St \& Tenley Circle NW                          & Connecticut Ave \& Yuma St NW                        & Subscriber                                           \\
+	 1330037                                               & 2017-05-30 01:02:59                                   & 2017-05-30 01:13:37                                   &  637.251                                              & 17th St \& Massachusetts Ave NW                      & 5th \& K St NW                                       & Subscriber                                           \\
+	  665458                                               & 2017-04-02 07:48:35                                   & 2017-04-02 08:19:03                                   & 1827.341                                              & Constitution Ave \& 2nd St NW/DOL                    & M St \& Pennsylvania Ave NW                          & Customer                                             \\
+	 1481135                                               & 2017-06-10 08:36:28                                   & 2017-06-10 09:02:17                                   & 1549.427                                              & Henry Bacon Dr \& Lincoln Memorial Circle NW         & Maine Ave \& 7th St SW                               & Subscriber                                           \\
+	 1148202                                               & 2017-05-14 07:18:18                                   & 2017-05-14 07:24:56                                   &  398.000                                              & 1st \& K St SE                                       & Eastern Market Metro / Pennsylvania Ave \& 7th St SE & Subscriber                                           \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{}Visualizing a small subset sample to identify any patterns/missing data}
+         \PY{n+nf}{sample}\PY{p}{(}\PY{n}{wash}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllll}
+  & Trip.Duration & X & End.Station & User.Type & months & Start.Time & End.Time & Start.Station\\
+\hline
+	1 &  489.066                                                & 1621326                                                 & 15th \& K St NW                                        & Subscriber                                              & Jun                                                     & 2017-06-21 08:36:34                                     & 2017-06-21 08:44:43                                     & 14th \& Belmont St NW                                 \\
+	2 &  402.549                                                &  482740                                                 & Connecticut Ave \& Yuma St NW                          & Subscriber                                              & Mar                                                     & 2017-03-11 10:40:00                                     & 2017-03-11 10:46:00                                     & Yuma St \& Tenley Circle NW                           \\
+	3 &  637.251                                                & 1330037                                                 & 5th \& K St NW                                         & Subscriber                                              & May                                                     & 2017-05-30 01:02:59                                     & 2017-05-30 01:13:37                                     & 17th St \& Massachusetts Ave NW                       \\
+	4 & 1827.341                                                &  665458                                                 & M St \& Pennsylvania Ave NW                            & Customer                                                & Apr                                                     & 2017-04-02 07:48:35                                     & 2017-04-02 08:19:03                                     & Constitution Ave \& 2nd St NW/DOL                     \\
+	5 & 1549.427                                                & 1481135                                                 & Maine Ave \& 7th St SW                                 & Subscriber                                              & Jun                                                     & 2017-06-10 08:36:28                                     & 2017-06-10 09:02:17                                     & Henry Bacon Dr \& Lincoln Memorial Circle NW          \\
+	6 &  398.000                                                & 1148202                                                 & Eastern Market Metro / Pennsylvania Ave \& 7th St SE   & Subscriber                                              & May                                                     & 2017-05-14 07:18:18                                     & 2017-05-14 07:24:56                                     & 1st \& K St SE                                        \\
+	7 & 1105.429                                                & 1594275                                                 & 8th \& H St NW                                         & Subscriber                                              & Jun                                                     & 2017-06-19 08:41:43                                     & 2017-06-19 09:00:08                                     & Park Rd \& Holmead Pl NW                              \\
+	8 &  636.218                                                & 1601832                                                 & Potomac \& Pennsylvania Ave SE                         & Subscriber                                              & Jun                                                     & 2017-06-20 05:54:42                                     & 2017-06-20 06:05:18                                     & 1st \& D St SE                                        \\
+	9 &  328.530                                                &  574182                                                 & 15th \& P St NW                                        & Subscriber                                              & Mar                                                     & 2017-03-24 20:37:00                                     & 2017-03-24 20:42:00                                     & 18th \& R St NW                                       \\
+	10 & 1188.090                                                &  327058                                                 & Lynn \& 19th St North                                  & Subscriber                                              & Feb                                                     & 2017-02-20 21:12:00                                     & 2017-02-20 21:31:00                                     & 17th \& Corcoran St NW                                \\
+	11 &  866.689                                                &  854729                                                 & 37th \& O St NW / Georgetown University                & Customer                                                & Apr                                                     & 2017-04-17 02:50:51                                     & 2017-04-17 03:05:17                                     & 37th \& O St NW / Georgetown University               \\
+	12 & 2385.411                                                &  721887                                                 & 5th St \& Massachusetts Ave NW                         & Customer                                                & Apr                                                     & 2017-04-08 01:12:48                                     & 2017-04-08 01:52:33                                     & 10th \& G St NW                                       \\
+	13 &  951.457                                                &  143181                                                 & 1st \& Rhode Island Ave NW                             & Subscriber                                              & Jan                                                     & 2017-01-26 20:01:00                                     & 2017-01-26 20:17:00                                     & 10th St \& L'Enfant Plaza SW                          \\
+	14 &  448.628                                                &   26953                                                 & 1st \& M St NE                                         & Subscriber                                              & Jan                                                     & 2017-01-06 17:36:00                                     & 2017-01-06 17:43:00                                     & North Capitol St \& F St NW                           \\
+	15 & 2039.472                                              & 1308542                                               & Lincoln Memorial                                      & Customer                                              & May                                                   & 2017-05-28 03:50:26                                   & 2017-05-28 04:24:26                                   & Henry Bacon Dr \& Lincoln Memorial Circle NW        \\
+	16 &  505.482                                                & 1592744                                                 & North Capitol St \& G Pl NE                            & Subscriber                                              & Jun                                                     & 2017-06-19 07:46:35                                     & 2017-06-19 07:55:00                                     & Metro Center / 12th \& G St NW                        \\
+	17 & 1591.326                                                & 1139713                                                 & New York Ave \& 15th St NW                             & Customer                                                & May                                                     & 2017-05-13 11:29:16                                     & 2017-05-13 11:55:47                                     & 16th \& Harvard St NW                                 \\
+	18 & 1672.075                                                & 1478516                                                 & 15th \& East Capitol St NE                             & Subscriber                                              & Jun                                                     & 2017-06-10 06:04:41                                     & 2017-06-10 06:32:33                                     & 17th St \& Massachusetts Ave NW                       \\
+	19 &  231.952                                                &  679837                                                 & 6th \& S Ball St                                       & Subscriber                                              & Apr                                                     & 2017-04-03 10:22:19                                     & 2017-04-03 10:26:11                                     & 20th \& Crystal Dr                                    \\
+	20 & 2291.454                                                & 1392498                                                 & Lamont \& Mt Pleasant NW                               & Customer                                                & Jun                                                     & 2017-06-03 11:42:54                                     & 2017-06-03 12:21:05                                     & 22nd \& I St NW / Foggy Bottom                        \\
+	21 & 1261.363                                                &  746605                                                 & Smithsonian-National Mall / Jefferson Dr \& 12th St SW & Customer                                                & Apr                                                     & 2017-04-09 11:05:42                                     & 2017-04-09 11:26:44                                     & Henry Bacon Dr \& Lincoln Memorial Circle NW          \\
+	22 & 2964.818                                              &  868881                                               & Congress Heights Metro                                & Subscriber                                            & Apr                                                   & 2017-04-18 05:42:04                                   & 2017-04-18 06:31:28                                   & Anacostia Metro                                      \\
+	23 &  825.590                                                & 1161275                                                 & Oklahoma Ave \& D St NE                                & Subscriber                                              & May                                                     & 2017-05-15 07:35:21                                     & 2017-05-15 07:49:06                                     & 3rd \& H St NE                                        \\
+	24 &  226.006                                                &  305000                                                 & Calvert St \& Woodley Pl NW                            & Subscriber                                              & Feb                                                     & 2017-02-19 00:43:00                                     & 2017-02-19 00:46:00                                     & 18th St \& Wyoming Ave NW                             \\
+	25 &  920.840                                                & 1174029                                                 & L'Enfant Plaza / 7th \& C St SW                        & Subscriber                                              & May                                                     & 2017-05-16 07:34:43                                     & 2017-05-16 07:50:04                                     & Florida Ave \& R St NW                                \\
+	26 & 1371.512                                                & 1157984                                                 & Arlington Blvd \& Fillmore St                          & Subscriber                                              & May                                                     & 2017-05-15 05:39:22                                     & 2017-05-15 06:02:14                                     & Lincoln Memorial                                       \\
+	27 &  254.076                                                &  694527                                                 & 11th \& M St NW                                        & Subscriber                                              & Apr                                                     & 2017-04-05 01:36:31                                     & 2017-04-05 01:40:45                                     & 13th St \& New York Ave NW                            \\
+	28 &  834.780                                                &  228536                                                 & Massachusetts Ave \& Dupont Circle NW                  & Subscriber                                              & Feb                                                     & 2017-02-08 09:17:00                                     & 2017-02-08 09:31:00                                     & 39th \& Calvert St NW / Stoddert                      \\
+	29 & 7427.749                                                &  669432                                                 & 2nd St \& Massachusetts Ave NE                         & Customer                                                & Apr                                                     & 2017-04-02 12:11:35                                     & 2017-04-02 02:15:22                                     & 2nd St \& Massachusetts Ave NE                        \\
+	30 & 1165.698                                              & 1036255                                               & Georgetown Harbor / 30th St NW                        & Subscriber                                            & May                                                   & 2017-05-02 11:49:43                                   & 2017-05-02 12:09:09                                   & 10th \& K St NW                                     \\
+	⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	89022 &  779.371                                           &  676408                                            & 17th \& Corcoran St NW                            & Subscriber                                         & Apr                                                & 2017-04-03 07:03:02                                & 2017-04-03 07:16:01                                & 10th \& K St NW                                  \\
+	89023 &  275.761                                           &  551347                                            & Bethesda Ave \& Arlington Rd                      & Subscriber                                         & Mar                                                & 2017-03-22 09:30:00                                & 2017-03-22 09:34:00                                & Offutt Ln \& Chevy Chase Dr                      \\
+	89024 &  456.235                                         &  905153                                          & Columbus Circle / Union Station                  & Subscriber                                       & Apr                                              & 2017-04-21 04:39:43                              & 2017-04-21 04:47:19                              & 3rd \& G St SE                                 \\
+	89025 & 2692.475                                           &  625949                                            & Washington \& Independence Ave SW/HHS             & Subscriber                                         & Mar                                                & 2017-03-29 15:39:00                                & 2017-03-29 16:23:00                                & Columbus Circle / Union Station                   \\
+	89026 &  244.334                                           & 1667242                                            & 11th \& M St NW                                   & Subscriber                                         & Jun                                                & 2017-06-25 02:03:23                                & 2017-06-25 02:07:28                                & 13th St \& New York Ave NW                       \\
+	89027 &  468.211                                           &  241483                                            & Mount Vernon Ave \& E Del Ray Ave                 & Subscriber                                         & Feb                                                & 2017-02-09 21:14:00                                & 2017-02-09 21:22:00                                & Braddock Rd Metro                                 \\
+	89028 &  564.069                                           &  893870                                            & 8th \& H St NW                                    & Subscriber                                         & Apr                                                & 2017-04-20 05:32:02                                & 2017-04-20 05:41:26                                & 1st \& O St NW                                   \\
+	89029 & 2560.164                                           & 1673660                                            & Ballston Metro / N Stuart \& 9th St N             & Subscriber                                         & Jun                                                & 2017-06-25 07:58:00                                & 2017-06-25 08:40:40                                & Ballston Metro / N Stuart \& 9th St N            \\
+	89030 &  707.024                                           &  531841                                            & Metro Center / 12th \& G St NW                    & Subscriber                                         & Mar                                                & 2017-03-20 11:44:00                                & 2017-03-20 11:56:00                                & 18th \& M St NW                                  \\
+	89031 & 1997.738                                           & 1143611                                            & 4th \& M St SW                                    & Customer                                           & May                                                & 2017-05-14 03:06:09                                & 2017-05-14 03:39:27                                & 4th \& C St SW                                   \\
+	89032 & 1136.869                                           &  760548                                            & 4th St \& Madison Dr NW                           & Customer                                           & Apr                                                & 2017-04-10 09:49:09                                & 2017-04-10 10:08:06                                & Jefferson Dr \& 14th St SW                       \\
+	89033 & 2817.361                                           &  585303                                            & New York Ave \& 15th St NW                        & Subscriber                                         & Mar                                                & 2017-03-25 16:15:00                                & 2017-03-25 17:02:00                                & Jefferson Dr \& 14th St SW                       \\
+	89034 &  518.196                                           &  774610                                            & 6th St \& Indiana Ave NW                          & Subscriber                                         & Apr                                                & 2017-04-11 09:01:58                                & 2017-04-11 09:10:36                                & 7th \& E St SW                                   \\
+	89035 &  815.682                                           & 1681261                                            & 4th St \& Madison Dr NW                           & Customer                                           & Jun                                                & 2017-06-26 03:39:32                                & 2017-06-26 03:53:08                                & 4th \& East Capitol St NE                        \\
+	89036 &  360.841                                         & 1068808                                          & Anacostia Metro                                  & Subscriber                                       & May                                              & 2017-05-05 12:32:12                              & 2017-05-05 12:38:13                              & Good Hope Rd \& MLK Ave SE                     \\
+	89037 &  543.352                                         &  385427                                          & Anacostia Metro                                  & Subscriber                                       & Feb                                              & 2017-02-27 07:03:00                              & 2017-02-27 07:12:00                              & Alabama \& MLK Ave SE                          \\
+	89038 &  577.966                                           &  242173                                            & New Hampshire Ave \& 24th St NW                   & Subscriber                                         & Feb                                                & 2017-02-10 07:39:00                                & 2017-02-10 07:48:00                                & 20th St \& Florida Ave NW                        \\
+	89039 & 1385.731                                             &  982818                                              & Ohio Dr \& West Basin Dr SW / MLK \& FDR Memorials & Customer                                             & Apr                                                  & 2017-04-28 11:03:05                                  & 2017-04-28 11:26:11                                  & Lincoln Memorial                                    \\
+	89040 & 1253.775                                           & 1742606                                            & 17th \& G St NW                                   & Customer                                           & Jun                                                & 2017-06-30 05:59:23                                & 2017-06-30 06:20:17                                & Lincoln Memorial                                  \\
+	89041 &  417.479                                           & 1583466                                            & 1st \& K St SE                                    & Subscriber                                         & Jun                                                & 2017-06-18 08:44:33                                & 2017-06-18 08:51:31                                & Maine Ave \& 7th St SW                           \\
+	89042 & 1104.388                                           & 1500573                                            & 10th \& G St NW                                   & Subscriber                                         & Jun                                                & 2017-06-12 03:36:53                                & 2017-06-12 03:55:17                                & 5th \& F St NW                                   \\
+	89043 & 1474.546                                         &   45867                                          & Jefferson Memorial                               & Subscriber                                       & Jan                                              & 2017-01-11 13:50:00                              & 2017-01-11 14:14:00                              & USDA / 12th \& Independence Ave SW             \\
+	89044 &  978.056                                           & 1534964                                            & 8th \& East Capitol St NE                         & Subscriber                                         & Jun                                                & 2017-06-14 09:33:25                                & 2017-06-14 09:49:43                                & 10th \& K St NW                                  \\
+	89045 &  732.245                                           & 1371409                                            & L'Enfant Plaza / 7th \& C St SW                   & Customer                                           & Jun                                                & 2017-06-02 06:02:14                                & 2017-06-02 06:14:27                                & Columbus Circle / Union Station                   \\
+	89046 & 1669.700                                           & 1484340                                            & 4th St \& Madison Dr NW                           & Customer                                           & Jun                                                & 2017-06-10 10:58:09                                & 2017-06-10 11:25:58                                & M St \& New Jersey Ave SE                        \\
+	89047 & 1082.789                                           &  555788                                            & 21st \& I St NW                                   & Subscriber                                         & Mar                                                & 2017-03-22 18:46:00                                & 2017-03-22 19:04:00                                & 8th \& H St NW                                   \\
+	89048 &  571.879                                         &  739004                                          & Columbus Circle / Union Station                  & Subscriber                                       & Apr                                              & 2017-04-09 04:00:22                              & 2017-04-09 04:09:54                              & Eckington Pl \& Q St NE                        \\
+	89049 &  404.152                                           & 1214907                                            & 1st \& Rhode Island Ave NW                        & Subscriber                                         & May                                                & 2017-05-19 09:00:53                                & 2017-05-19 09:07:38                                & 1st \& M St NE                                   \\
+	89050 & 1345.911                                         & 1419806                                          & Georgetown Harbor / 30th St NW                   & Customer                                         & Jun                                              & 2017-06-06 04:27:33                              & 2017-06-06 04:49:59                              & 10th \& Florida Ave NW                         \\
+	NA &       NA                                         &      NA                                          & NA                                               & NA                                               & NA                                               & NA                                               & NA                                               & NA                                              \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}Checking for null values in wash dataset}
+         \PY{n+nf}{apply}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{wash}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{,} \PY{n}{sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[X] 1
+\item[Start.Time] 1
+\item[End.Time] 1
+\item[Trip.Duration] 1
+\item[Start.Station] 1
+\item[End.Station] 1
+\item[User.Type] 1
+\item[months] 1
+\end{description*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}Checking for null values}
+         \PY{n}{wash} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} \PY{n+nf}{summarise\PYZus{}all}\PY{p}{(}\PY{n+nf}{funs}\PY{p}{(}\PY{n+nf}{sum}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{.)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & months\\
+\hline
+	 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nf}{head}\PY{p}{(}\PY{n}{chi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year\\
+\hline
+	 1423854                         & 2017-06-23 15:09:32             & 2017-06-23 15:14:53             &  321                            & Wood St \& Hubbard St          & Damen Ave \& Chicago Ave       & Subscriber                      & Male                            & 1992                           \\
+	  955915                        & 2017-05-25 18:19:03            & 2017-05-25 18:45:53            & 1610                           & Theater on the Lake            & Sheffield Ave \& Waveland Ave & Subscriber                     & Female                         & 1992                          \\
+	    9031                         & 2017-01-04 08:27:49             & 2017-01-04 08:34:45             &  416                            & May St \& Taylor St            & Wood St \& Taylor St           & Subscriber                      & Male                            & 1981                           \\
+	  304487                         & 2017-03-06 13:49:38             & 2017-03-06 13:55:28             &  350                            & Christiana Ave \& Lawrence Ave & St. Louis Ave \& Balmoral Ave  & Subscriber                      & Male                            & 1986                           \\
+	   45207                         & 2017-01-17 14:53:07             & 2017-01-17 15:02:01             &  534                            & Clark St \& Randolph St        & Desplaines St \& Jackson Blvd  & Subscriber                      & Male                            & 1975                           \\
+	 1473887                         & 2017-06-26 09:01:20             & 2017-06-26 09:11:06             &  586                            & Clinton St \& Washington Blvd  & Canal St \& Taylor St          & Subscriber                      & Male                            & 1990                           \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{}Visualizing a small subset sample to identify any patterns/missing data}
+         \PY{n+nf}{sample}\PY{p}{(}\PY{n}{chi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllll}
+ Start.Station & Start.Time & Trip.Duration & Birth.Year & months & X & End.Station & User.Type & End.Time & Gender\\
+\hline
+	 Wood St \& Hubbard St                 & 2017-06-23 15:09:32                    &  321                                   & 1992                                   & Jun                                    & 1423854                                & Damen Ave \& Chicago Ave              & Subscriber                             & 2017-06-23 15:14:53                    & Male                                  \\
+	 Theater on the Lake                    & 2017-05-25 18:19:03                    & 1610                                   & 1992                                   & May                                    &  955915                                & Sheffield Ave \& Waveland Ave         & Subscriber                             & 2017-05-25 18:45:53                    & Female                                \\
+	 May St \& Taylor St                   & 2017-01-04 08:27:49                    &  416                                   & 1981                                   & Jan                                    &    9031                                & Wood St \& Taylor St                  & Subscriber                             & 2017-01-04 08:34:45                    & Male                                  \\
+	 Christiana Ave \& Lawrence Ave        & 2017-03-06 13:49:38                    &  350                                   & 1986                                   & Mar                                    &  304487                                & St. Louis Ave \& Balmoral Ave         & Subscriber                             & 2017-03-06 13:55:28                    & Male                                  \\
+	 Clark St \& Randolph St               & 2017-01-17 14:53:07                    &  534                                   & 1975                                   & Jan                                    &   45207                                & Desplaines St \& Jackson Blvd         & Subscriber                             & 2017-01-17 15:02:01                    & Male                                  \\
+	 Clinton St \& Washington Blvd         & 2017-06-26 09:01:20                    &  586                                   & 1990                                   & Jun                                    & 1473887                                & Canal St \& Taylor St                 & Subscriber                             & 2017-06-26 09:11:06                    & Male                                  \\
+	 Ashland Ave \& Lake St                & 2017-05-26 09:41:44                    &  281                                   & 1983                                   & May                                    &  961916                                & Wood St \& Hubbard St                 & Subscriber                             & 2017-05-26 09:46:25                    & Female                                \\
+	 Larrabee St \& Kingsbury St           & 2017-01-21 14:28:38                    &  723                                   &   NA                                   & Jan                                    &   65924                                & Larrabee St \& Armitage Ave           & Customer                               & 2017-01-21 14:40:41                    &                                       \\
+	 Sedgwick St \& Huron St               & 2017-04-20 16:08:51                    &  689                                   & 1984                                   & Apr                                    &  606841                                & Halsted St \& Blackhawk St (*)        & Subscriber                             & 2017-04-20 16:20:20                    & Male                                  \\
+	 Stetson Ave \& South Water St         & 2017-02-06 18:00:47                    &  493                                   & 1979                                   & Feb                                    &  135470                                & Clinton St \& Washington Blvd         & Subscriber                             & 2017-02-06 18:09:00                    & Male                                  \\
+	 Broadway \& Barry Ave                 & 2017-02-15 07:09:55                    &  301                                   & 1993                                   & Feb                                    &  175805                                & Wilton Ave \& Belmont Ave             & Subscriber                             & 2017-02-15 07:14:56                    & Female                                \\
+	 Southport Ave \& Wellington Ave       & 2017-01-22 15:15:45                    &  917                                   & 1964                                   & Jan                                    &   71678                                & Clark St \& Schiller St               & Subscriber                             & 2017-01-22 15:31:02                    & Male                                  \\
+	 Green St \& Madison St                & 2017-01-08 16:03:00                    &  277                                   & 1961                                   & Jan                                    &   19061                                & Ada St \& Washington Blvd             & Subscriber                             & 2017-01-08 16:07:37                    & Male                                  \\
+	 Larrabee St \& Kingsbury St           & 2017-05-30 15:46:18                    &  354                                   & 1985                                   & May                                    & 1023296                                & Clark St \& Elm St                    & Subscriber                             & 2017-05-30 15:52:12                    & Male                                  \\
+	 Canal St \& Madison St                & 2017-04-20 19:26:33                    &  515                                   & 1984                                   & Apr                                    &  611000                                & Racine Ave (May St) \& Fulton St      & Subscriber                             & 2017-04-20 19:35:08                    & Male                                  \\
+	 Clark St \& Armitage Ave              & 2017-05-25 22:59:33                    &  466                                   & 1985                                   & May                                    &  958716                                & Sheffield Ave \& Wrightwood Ave       & Subscriber                             & 2017-05-25 23:07:19                    & Female                                \\
+	 Ada St \& Washington Blvd           & 2017-05-03 13:20:38                  &  635                                 & 1967                                 & May                                  &  718598                              & Daley Center Plaza                   & Subscriber                           & 2017-05-03 13:31:13                  & Male                                \\
+	 Damen Ave \& Cortland St              & 2017-05-23 08:08:25                    &  164                                   & 1990                                   & May                                    &  931608                                & Marshfield Ave \& Cortland St         & Subscriber                             & 2017-05-23 08:11:09                    & Male                                  \\
+	 State St \& Pearson St                & 2017-06-25 21:26:30                    &  434                                   & 1987                                   & Jun                                    & 1469705                                & Clark St \& Schiller St               & Subscriber                             & 2017-06-25 21:33:44                    & Male                                  \\
+	 Adler Planetarium                    & 2017-04-08 11:37:55                  &  840                                 &   NA                                 & Apr                                  &  475456                              & Burnham Harbor                       & Customer                             & 2017-04-08 11:51:55                  &                                     \\
+	 Michigan Ave \& Oak St                & 2017-05-16 06:36:17                    & 1397                                   & 1992                                   & May                                    &  849468                                & Halsted St \& Wrightwood Ave          & Subscriber                             & 2017-05-16 06:59:34                    & Female                                \\
+	 Rush St \& Cedar St                   & 2017-06-23 12:21:01                    &  713                                   & 1985                                   & Jun                                    & 1420915                                & Halsted St \& Willow St               & Subscriber                             & 2017-06-23 12:32:54                    & Male                                  \\
+	 Clarendon Ave \& Leland Ave           & 2017-02-12 15:24:29                    &  854                                   & 1980                                   & Feb                                    &  161454                                & Lake Shore Dr \& Belmont Ave          & Subscriber                             & 2017-02-12 15:38:43                    & Male                                  \\
+	 Bissell St \& Armitage Ave            & 2017-06-22 19:14:37                    &  917                                   & 1989                                   & Jun                                    & 1413814                                & Orleans St \& Chestnut St (NEXT Apts) & Subscriber                             & 2017-06-22 19:29:54                    & Female                                \\
+	 Wabash Ave \& Roosevelt Rd            & 2017-05-03 09:41:11                    &  479                                   & 1992                                   & May                                    &  717248                                & Halsted St \& Roosevelt Rd            & Subscriber                             & 2017-05-03 09:49:10                    & Male                                  \\
+	 Rush St \& Cedar St                   & 2017-06-24 20:47:40                    & 1559                                   & 1968                                   & Jun                                    & 1451810                                & Halsted St \& Roscoe St               & Subscriber                             & 2017-06-24 21:13:39                    & Male                                  \\
+	 Loomis St \& Jackson Blvd             & 2017-03-23 09:38:27                    &  254                                   & 1985                                   & Mar                                    &  385517                                & Peoria St \& Jackson Blvd             & Subscriber                             & 2017-03-23 09:42:41                    & Female                                \\
+	 Canal St \& Madison St                & 2017-06-09 07:48:55                    &  215                                   & 1974                                   & Jun                                    & 1186035                                & Clark St \& Randolph St               & Subscriber                             & 2017-06-09 07:52:30                    & Male                                  \\
+	 Clinton St \& Lake St                 & 2017-04-11 18:49:57                    &  579                                   & 1989                                   & Apr                                    &  512692                                & Mies van der Rohe Way \& Chestnut St  & Subscriber                             & 2017-04-11 18:59:36                    & Male                                  \\
+	 Halsted St \& Dickens Ave             & 2017-02-25 19:01:19                    &  411                                   & 1970                                   & Feb                                    &  261757                                & Halsted St \& Wrightwood Ave          & Subscriber                             & 2017-02-25 19:08:10                    & Male                                  \\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	 Michigan Ave \& Oak St           & 2017-06-08 10:41:48               &  921                              & 1997                              & Jun                               & 1171002                           & Theater on the Lake               & Subscriber                        & 2017-06-08 10:57:09               & Male                             \\
+	 Streeter Dr \& Grand Ave           & 2017-06-20 14:05:16                 &  747                                &   NA                                & Jun                                 & 1371090                             & Lake Shore Dr \& North Blvd        & Customer                            & 2017-06-20 14:17:43                 &                                    \\
+	 Shedd Aquarium                    & 2017-04-15 15:45:09               & 1571                              &   NA                              & Apr                               &  550447                           & Adler Planetarium                 & Customer                          & 2017-04-15 16:11:20               &                                  \\
+	 Streeter Dr \& Grand Ave           & 2017-02-22 15:28:34                 &  604                                &   NA                                & Feb                                 &  243811                             & Wabash Ave \& Grand Ave            & Customer                            & 2017-02-22 15:38:38                 &                                    \\
+	 Rush St \& Superior St             & 2017-02-19 20:01:24                 &  410                                & 1958                                & Feb                                 &  220157                             & Lake Shore Dr \& Ohio St           & Subscriber                          & 2017-02-19 20:08:14                 & Male                               \\
+	 Lake Shore Dr \& North Blvd        & 2017-06-22 13:15:06                 & 3309                                &   NA                                & Jun                                 & 1406209                             & Larrabee St \& Webster Ave         & Customer                            & 2017-06-22 14:10:15                 &                                    \\
+	 Milwaukee Ave \& Grand Ave         & 2017-05-30 09:03:01                 &  492                                & 1984                                & May                                 & 1019063                             & Clinton St \& Madison St           & Subscriber                          & 2017-05-30 09:11:13                 & Male                               \\
+	 Ritchie Ct \& Banks St             & 2017-06-29 07:19:56                 & 1342                                & 1988                                & Jun                                 & 1521139                             & Peoria St \& Jackson Blvd          & Subscriber                          & 2017-06-29 07:42:18                 & Female                             \\
+	 Burnham Harbor                    & 2017-06-25 16:43:18               &  944                              &   NA                              & Jun                               & 1464943                           & Shedd Aquarium                    & Customer                          & 2017-06-25 16:59:02               &                                  \\
+	 Dearborn St \& Adams St            & 2017-02-23 13:21:52                 &  165                                & 1956                                & Feb                                 &  252627                             & Franklin St \& Monroe St           & Subscriber                          & 2017-02-23 13:24:37                 & Male                               \\
+	 Fort Dearborn Dr \& 31st St        & 2017-02-23 16:31:20                 &  357                                & 1985                                & Feb                                 &  253570                             & Calumet Ave \& 33rd St             & Subscriber                          & 2017-02-23 16:37:17                 & Male                               \\
+	 Michigan Ave \& Madison St         & 2017-02-10 13:16:59                 &  325                                & 1979                                & Feb                                 &  152475                             & Clark St \& Congress Pkwy          & Subscriber                          & 2017-02-10 13:22:24                 & Male                               \\
+	 Streeter Dr \& Grand Ave         & 2017-02-25 12:15:05               & 1056                              & 1982                              & Feb                               &  260811                           & Theater on the Lake               & Subscriber                        & 2017-02-25 12:32:41               & Female                           \\
+	 Normal Ave \& Archer Ave           & 2017-04-20 08:43:13                 &  243                                & 1984                                & Apr                                 &  602912                             & Wentworth Ave \& Archer Ave        & Subscriber                          & 2017-04-20 08:47:16                 & Female                             \\
+	 Clinton St \& Madison St           & 2017-05-09 08:50:46                 &  275                                & 1975                                & May                                 &  768050                             & Sangamon St \& Washington Blvd (*) & Subscriber                          & 2017-05-09 08:55:21                 & Male                               \\
+	 Calumet Ave \& 18th St             & 2017-04-20 07:29:58                 & 1176                                & 1973                                & Apr                                 &  601593                             & Canal St \& Madison St             & Subscriber                          & 2017-04-20 07:49:34                 & Male                               \\
+	 Pine Grove Ave \& Waveland Ave     & 2017-06-13 07:11:51                 & 1157                                & 1986                                & Jun                                 & 1256568                             & Michigan Ave \& Oak St             & Subscriber                          & 2017-06-13 07:31:08                 & Male                               \\
+	 Canal St \& Madison St             & 2017-01-19 07:49:35                 &  234                                & 1964                                & Jan                                 &   53692                             & Kingsbury St \& Kinzie St          & Subscriber                          & 2017-01-19 07:53:29                 & Male                               \\
+	 Canal St \& Adams St               & 2017-06-20 17:05:11                 & 1693                                & 1980                                & Jun                                 & 1374113                             & Halsted St \& Roscoe St            & Subscriber                          & 2017-06-20 17:33:24                 & Male                               \\
+	 Wabash Ave \& Wacker Pl            & 2017-06-21 20:06:34                 & 1116                                &   NA                                & Jun                                 & 1397375                             & Morgan St \& Lake St               & Customer                            & 2017-06-21 20:25:10                 &                                    \\
+	 Theater on the Lake                 & 2017-05-31 11:33:16                 & 2255                                &   NA                                & May                                 & 1035179                             & Lake Shore Dr \& Ohio St           & Customer                            & 2017-05-31 12:10:51                 &                                    \\
+	 Eckhart Park                        & 2017-06-06 07:19:45                 &  869                                & 1985                                & Jun                                 & 1134061                             & Clark St \& Lake St                & Subscriber                          & 2017-06-06 07:34:14                 & Male                               \\
+	 Daley Center Plaza                  & 2017-06-23 16:23:14                 &  531                                & 1979                                & Jun                                 & 1425622                             & St. Clair St \& Erie St            & Subscriber                          & 2017-06-23 16:32:05                 & Male                               \\
+	 Millennium Park                     & 2017-01-03 17:35:11                 &  395                                & 1976                                & Jan                                 &    7087                             & Indiana Ave \& Roosevelt Rd        & Subscriber                          & 2017-01-03 17:41:46                 & Male                               \\
+	 Southport Ave \& Waveland Ave      & 2017-03-24 16:52:16                 &  341                                & 1990                                & Mar                                 &  397518                             & Southport Ave \& Waveland Ave      & Subscriber                          & 2017-03-24 16:57:57                 & Male                               \\
+	 Artesian Ave \& Hubbard St         & 2017-05-18 05:06:50                 &  920                                & 1959                                & May                                 &  879494                             & Wacker Dr \& Washington St         & Subscriber                          & 2017-05-18 05:22:10                 & Male                               \\
+	 Wabash Ave \& Roosevelt Rd         & 2017-03-19 07:21:29                 &  349                                & 1987                                & Mar                                 &  360389                             & Wells St \& Polk St                & Subscriber                          & 2017-03-19 07:27:18                 & Male                               \\
+	 Ashland Ave \& Harrison St         & 2017-05-16 17:03:24                 & 1668                                & 1963                                & May                                 &  858496                             & Wells St \& Concord Ln             & Subscriber                          & 2017-05-16 17:31:12                 & Male                               \\
+	 Western Ave \& Leland Ave          & 2017-05-10 08:53:03                 &   89                                & 1977                                & May                                 &  777620                             & Western Ave \& Leland Ave          & Subscriber                          & 2017-05-10 08:54:32                 & Male                               \\
+	 Waba                              & 2017-06-11 14:52:13               & 3020                              &   NA                              & Jun                               & 1230561                           &                                   &                                   & 2017-06-11 15:42:33               &                                  \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}Checking for null values}
+         \PY{n+nf}{apply}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{chi}\PY{p}{)}\PY{p}{,} \PY{l+m}{2}\PY{p}{,} \PY{n}{sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[X] 0
+\item[Start.Time] 0
+\item[End.Time] 0
+\item[Trip.Duration] 0
+\item[Start.Station] 0
+\item[End.Station] 0
+\item[User.Type] 0
+\item[Gender] 0
+\item[Birth.Year] 1747
+\item[months] 0
+\end{description*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{}Checking for null values}
+         \PY{n}{chi} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} \PY{n+nf}{summarise\PYZus{}all}\PY{p}{(}\PY{n+nf}{funs}\PY{p}{(}\PY{n+nf}{sum}\PY{p}{(}\PY{n+nf}{is.na}\PY{p}{(}\PY{n}{.)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year & months\\
+\hline
+	 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 1747 & 0   \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nf}{sapply}\PY{p}{(}\PY{n+nf}{list}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Chicago\PYZdq{}} \PY{o}{=} \PY{n}{chi}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{New York\PYZdq{}} \PY{o}{=} \PY{n}{ny}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Washington\PYZdq{}} \PY{o}{=} \PY{n}{wash}\PY{p}{)}\PY{p}{,} \PY{n}{glimpse}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Observations: 8,630
+Variables: 9
+\$ X             <int> 1423854, 955915, 9031, 304487, 45207, 1473887, 961916, …
+\$ Start.Time    <fct> 2017-06-23 15:09:32, 2017-05-25 18:19:03, 2017-01-04 08…
+\$ End.Time      <fct> 2017-06-23 15:14:53, 2017-05-25 18:45:53, 2017-01-04 08…
+\$ Trip.Duration <int> 321, 1610, 416, 350, 534, 586, 281, 723, 689, 493, 301,…
+\$ Start.Station <fct> Wood St \& Hubbard St, Theater on the Lake, May St \& Tay…
+\$ End.Station   <fct> Damen Ave \& Chicago Ave, Sheffield Ave \& Waveland Ave, …
+\$ User.Type     <fct> Subscriber, Subscriber, Subscriber, Subscriber, Subscri…
+\$ Gender        <fct> Male, Female, Male, Male, Male, Male, Female, , Male, M…
+\$ Birth.Year    <dbl> 1992, 1992, 1981, 1986, 1975, 1990, 1983, NA, 1984, 197…
+Observations: 54,770
+Variables: 9
+\$ X             <int> 5688089, 4096714, 2173887, 3945638, 6208972, 1285652, 1…
+\$ Start.Time    <fct> 2017-06-11 14:55:05, 2017-05-11 15:30:11, 2017-03-29 13…
+\$ End.Time      <fct> 2017-06-11 15:08:21, 2017-05-11 15:41:43, 2017-03-29 13…
+\$ Trip.Duration <int> 795, 692, 1325, 703, 329, 998, 478, 4038, 5132, 309, 11…
+\$ Start.Station <fct> Suffolk St \& Stanton St, Lexington Ave \& E 63 St, 1 Pl …
+\$ End.Station   <fct> W Broadway \& Spring St, 1 Ave \& E 78 St, Henry St \& Deg…
+\$ User.Type     <fct> Subscriber, Subscriber, Subscriber, Subscriber, Subscri…
+\$ Gender        <fct> Male, Male, Male, Female, Male, Male, Male, Male, , Mal…
+\$ Birth.Year    <dbl> 1998, 1981, 1987, 1986, 1992, 1986, 1982, 1984, NA, 199…
+Observations: 89,051
+Variables: 7
+\$ X             <int> 1621326, 482740, 1330037, 665458, 1481135, 1148202, 159…
+\$ Start.Time    <fct> 2017-06-21 08:36:34, 2017-03-11 10:40:00, 2017-05-30 01…
+\$ End.Time      <fct> 2017-06-21 08:44:43, 2017-03-11 10:46:00, 2017-05-30 01…
+\$ Trip.Duration <dbl> 489.066, 402.549, 637.251, 1827.341, 1549.427, 398.000,…
+\$ Start.Station <fct> 14th \& Belmont St NW, Yuma St \& Tenley Circle NW, 17th …
+\$ End.Station   <fct> 15th \& K St NW, Connecticut Ave \& Yuma St NW, 5th \& K S…
+\$ User.Type     <fct> Subscriber, Subscriber, Subscriber, Customer, Subscribe…
+
+    \end{Verbatim}
+
+    \begin{description}
+\item[\$Chicago] \begin{tabular}{r|lllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year\\
+\hline
+	 1423854                                & 2017-06-23 15:09:32                    & 2017-06-23 15:14:53                    &  321                                   & Wood St \& Hubbard St                 & Damen Ave \& Chicago Ave              & Subscriber                             & Male                                   & 1992                                  \\
+	  955915                                & 2017-05-25 18:19:03                    & 2017-05-25 18:45:53                    & 1610                                   & Theater on the Lake                    & Sheffield Ave \& Waveland Ave         & Subscriber                             & Female                                 & 1992                                  \\
+	    9031                                & 2017-01-04 08:27:49                    & 2017-01-04 08:34:45                    &  416                                   & May St \& Taylor St                   & Wood St \& Taylor St                  & Subscriber                             & Male                                   & 1981                                  \\
+	  304487                                & 2017-03-06 13:49:38                    & 2017-03-06 13:55:28                    &  350                                   & Christiana Ave \& Lawrence Ave        & St. Louis Ave \& Balmoral Ave         & Subscriber                             & Male                                   & 1986                                  \\
+	   45207                                & 2017-01-17 14:53:07                    & 2017-01-17 15:02:01                    &  534                                   & Clark St \& Randolph St               & Desplaines St \& Jackson Blvd         & Subscriber                             & Male                                   & 1975                                  \\
+	 1473887                                & 2017-06-26 09:01:20                    & 2017-06-26 09:11:06                    &  586                                   & Clinton St \& Washington Blvd         & Canal St \& Taylor St                 & Subscriber                             & Male                                   & 1990                                  \\
+	  961916                                & 2017-05-26 09:41:44                    & 2017-05-26 09:46:25                    &  281                                   & Ashland Ave \& Lake St                & Wood St \& Hubbard St                 & Subscriber                             & Female                                 & 1983                                  \\
+	   65924                                & 2017-01-21 14:28:38                    & 2017-01-21 14:40:41                    &  723                                   & Larrabee St \& Kingsbury St           & Larrabee St \& Armitage Ave           & Customer                               &                                        &   NA                                  \\
+	  606841                                & 2017-04-20 16:08:51                    & 2017-04-20 16:20:20                    &  689                                   & Sedgwick St \& Huron St               & Halsted St \& Blackhawk St (*)        & Subscriber                             & Male                                   & 1984                                  \\
+	  135470                                & 2017-02-06 18:00:47                    & 2017-02-06 18:09:00                    &  493                                   & Stetson Ave \& South Water St         & Clinton St \& Washington Blvd         & Subscriber                             & Male                                   & 1979                                  \\
+	  175805                                & 2017-02-15 07:09:55                    & 2017-02-15 07:14:56                    &  301                                   & Broadway \& Barry Ave                 & Wilton Ave \& Belmont Ave             & Subscriber                             & Female                                 & 1993                                  \\
+	   71678                                & 2017-01-22 15:15:45                    & 2017-01-22 15:31:02                    &  917                                   & Southport Ave \& Wellington Ave       & Clark St \& Schiller St               & Subscriber                             & Male                                   & 1964                                  \\
+	   19061                                & 2017-01-08 16:03:00                    & 2017-01-08 16:07:37                    &  277                                   & Green St \& Madison St                & Ada St \& Washington Blvd             & Subscriber                             & Male                                   & 1961                                  \\
+	 1023296                                & 2017-05-30 15:46:18                    & 2017-05-30 15:52:12                    &  354                                   & Larrabee St \& Kingsbury St           & Clark St \& Elm St                    & Subscriber                             & Male                                   & 1985                                  \\
+	  611000                                & 2017-04-20 19:26:33                    & 2017-04-20 19:35:08                    &  515                                   & Canal St \& Madison St                & Racine Ave (May St) \& Fulton St      & Subscriber                             & Male                                   & 1984                                  \\
+	  958716                                & 2017-05-25 22:59:33                    & 2017-05-25 23:07:19                    &  466                                   & Clark St \& Armitage Ave              & Sheffield Ave \& Wrightwood Ave       & Subscriber                             & Female                                 & 1985                                  \\
+	  718598                              & 2017-05-03 13:20:38                  & 2017-05-03 13:31:13                  &  635                                 & Ada St \& Washington Blvd           & Daley Center Plaza                   & Subscriber                           & Male                                 & 1967                                \\
+	  931608                                & 2017-05-23 08:08:25                    & 2017-05-23 08:11:09                    &  164                                   & Damen Ave \& Cortland St              & Marshfield Ave \& Cortland St         & Subscriber                             & Male                                   & 1990                                  \\
+	 1469705                                & 2017-06-25 21:26:30                    & 2017-06-25 21:33:44                    &  434                                   & State St \& Pearson St                & Clark St \& Schiller St               & Subscriber                             & Male                                   & 1987                                  \\
+	  475456                              & 2017-04-08 11:37:55                  & 2017-04-08 11:51:55                  &  840                                 & Adler Planetarium                    & Burnham Harbor                       & Customer                             &                                      &   NA                                \\
+	  849468                                & 2017-05-16 06:36:17                    & 2017-05-16 06:59:34                    & 1397                                   & Michigan Ave \& Oak St                & Halsted St \& Wrightwood Ave          & Subscriber                             & Female                                 & 1992                                  \\
+	 1420915                                & 2017-06-23 12:21:01                    & 2017-06-23 12:32:54                    &  713                                   & Rush St \& Cedar St                   & Halsted St \& Willow St               & Subscriber                             & Male                                   & 1985                                  \\
+	  161454                                & 2017-02-12 15:24:29                    & 2017-02-12 15:38:43                    &  854                                   & Clarendon Ave \& Leland Ave           & Lake Shore Dr \& Belmont Ave          & Subscriber                             & Male                                   & 1980                                  \\
+	 1413814                                & 2017-06-22 19:14:37                    & 2017-06-22 19:29:54                    &  917                                   & Bissell St \& Armitage Ave            & Orleans St \& Chestnut St (NEXT Apts) & Subscriber                             & Female                                 & 1989                                  \\
+	  717248                                & 2017-05-03 09:41:11                    & 2017-05-03 09:49:10                    &  479                                   & Wabash Ave \& Roosevelt Rd            & Halsted St \& Roosevelt Rd            & Subscriber                             & Male                                   & 1992                                  \\
+	 1451810                                & 2017-06-24 20:47:40                    & 2017-06-24 21:13:39                    & 1559                                   & Rush St \& Cedar St                   & Halsted St \& Roscoe St               & Subscriber                             & Male                                   & 1968                                  \\
+	  385517                                & 2017-03-23 09:38:27                    & 2017-03-23 09:42:41                    &  254                                   & Loomis St \& Jackson Blvd             & Peoria St \& Jackson Blvd             & Subscriber                             & Female                                 & 1985                                  \\
+	 1186035                                & 2017-06-09 07:48:55                    & 2017-06-09 07:52:30                    &  215                                   & Canal St \& Madison St                & Clark St \& Randolph St               & Subscriber                             & Male                                   & 1974                                  \\
+	  512692                                & 2017-04-11 18:49:57                    & 2017-04-11 18:59:36                    &  579                                   & Clinton St \& Lake St                 & Mies van der Rohe Way \& Chestnut St  & Subscriber                             & Male                                   & 1989                                  \\
+	  261757                                & 2017-02-25 19:01:19                    & 2017-02-25 19:08:10                    &  411                                   & Halsted St \& Dickens Ave             & Halsted St \& Wrightwood Ave          & Subscriber                             & Male                                   & 1970                                  \\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	 1171002                           & 2017-06-08 10:41:48               & 2017-06-08 10:57:09               &  921                              & Michigan Ave \& Oak St           & Theater on the Lake               & Subscriber                        & Male                              & 1997                             \\
+	 1371090                             & 2017-06-20 14:05:16                 & 2017-06-20 14:17:43                 &  747                                & Streeter Dr \& Grand Ave           & Lake Shore Dr \& North Blvd        & Customer                            &                                     &   NA                               \\
+	  550447                           & 2017-04-15 15:45:09               & 2017-04-15 16:11:20               & 1571                              & Shedd Aquarium                    & Adler Planetarium                 & Customer                          &                                   &   NA                             \\
+	  243811                             & 2017-02-22 15:28:34                 & 2017-02-22 15:38:38                 &  604                                & Streeter Dr \& Grand Ave           & Wabash Ave \& Grand Ave            & Customer                            &                                     &   NA                               \\
+	  220157                             & 2017-02-19 20:01:24                 & 2017-02-19 20:08:14                 &  410                                & Rush St \& Superior St             & Lake Shore Dr \& Ohio St           & Subscriber                          & Male                                & 1958                               \\
+	 1406209                             & 2017-06-22 13:15:06                 & 2017-06-22 14:10:15                 & 3309                                & Lake Shore Dr \& North Blvd        & Larrabee St \& Webster Ave         & Customer                            &                                     &   NA                               \\
+	 1019063                             & 2017-05-30 09:03:01                 & 2017-05-30 09:11:13                 &  492                                & Milwaukee Ave \& Grand Ave         & Clinton St \& Madison St           & Subscriber                          & Male                                & 1984                               \\
+	 1521139                             & 2017-06-29 07:19:56                 & 2017-06-29 07:42:18                 & 1342                                & Ritchie Ct \& Banks St             & Peoria St \& Jackson Blvd          & Subscriber                          & Female                              & 1988                               \\
+	 1464943                           & 2017-06-25 16:43:18               & 2017-06-25 16:59:02               &  944                              & Burnham Harbor                    & Shedd Aquarium                    & Customer                          &                                   &   NA                             \\
+	  252627                             & 2017-02-23 13:21:52                 & 2017-02-23 13:24:37                 &  165                                & Dearborn St \& Adams St            & Franklin St \& Monroe St           & Subscriber                          & Male                                & 1956                               \\
+	  253570                             & 2017-02-23 16:31:20                 & 2017-02-23 16:37:17                 &  357                                & Fort Dearborn Dr \& 31st St        & Calumet Ave \& 33rd St             & Subscriber                          & Male                                & 1985                               \\
+	  152475                             & 2017-02-10 13:16:59                 & 2017-02-10 13:22:24                 &  325                                & Michigan Ave \& Madison St         & Clark St \& Congress Pkwy          & Subscriber                          & Male                                & 1979                               \\
+	  260811                           & 2017-02-25 12:15:05               & 2017-02-25 12:32:41               & 1056                              & Streeter Dr \& Grand Ave         & Theater on the Lake               & Subscriber                        & Female                            & 1982                             \\
+	  602912                             & 2017-04-20 08:43:13                 & 2017-04-20 08:47:16                 &  243                                & Normal Ave \& Archer Ave           & Wentworth Ave \& Archer Ave        & Subscriber                          & Female                              & 1984                               \\
+	  768050                             & 2017-05-09 08:50:46                 & 2017-05-09 08:55:21                 &  275                                & Clinton St \& Madison St           & Sangamon St \& Washington Blvd (*) & Subscriber                          & Male                                & 1975                               \\
+	  601593                             & 2017-04-20 07:29:58                 & 2017-04-20 07:49:34                 & 1176                                & Calumet Ave \& 18th St             & Canal St \& Madison St             & Subscriber                          & Male                                & 1973                               \\
+	 1256568                             & 2017-06-13 07:11:51                 & 2017-06-13 07:31:08                 & 1157                                & Pine Grove Ave \& Waveland Ave     & Michigan Ave \& Oak St             & Subscriber                          & Male                                & 1986                               \\
+	   53692                             & 2017-01-19 07:49:35                 & 2017-01-19 07:53:29                 &  234                                & Canal St \& Madison St             & Kingsbury St \& Kinzie St          & Subscriber                          & Male                                & 1964                               \\
+	 1374113                             & 2017-06-20 17:05:11                 & 2017-06-20 17:33:24                 & 1693                                & Canal St \& Adams St               & Halsted St \& Roscoe St            & Subscriber                          & Male                                & 1980                               \\
+	 1397375                             & 2017-06-21 20:06:34                 & 2017-06-21 20:25:10                 & 1116                                & Wabash Ave \& Wacker Pl            & Morgan St \& Lake St               & Customer                            &                                     &   NA                               \\
+	 1035179                             & 2017-05-31 11:33:16                 & 2017-05-31 12:10:51                 & 2255                                & Theater on the Lake                 & Lake Shore Dr \& Ohio St           & Customer                            &                                     &   NA                               \\
+	 1134061                             & 2017-06-06 07:19:45                 & 2017-06-06 07:34:14                 &  869                                & Eckhart Park                        & Clark St \& Lake St                & Subscriber                          & Male                                & 1985                               \\
+	 1425622                             & 2017-06-23 16:23:14                 & 2017-06-23 16:32:05                 &  531                                & Daley Center Plaza                  & St. Clair St \& Erie St            & Subscriber                          & Male                                & 1979                               \\
+	    7087                             & 2017-01-03 17:35:11                 & 2017-01-03 17:41:46                 &  395                                & Millennium Park                     & Indiana Ave \& Roosevelt Rd        & Subscriber                          & Male                                & 1976                               \\
+	  397518                             & 2017-03-24 16:52:16                 & 2017-03-24 16:57:57                 &  341                                & Southport Ave \& Waveland Ave      & Southport Ave \& Waveland Ave      & Subscriber                          & Male                                & 1990                               \\
+	  879494                             & 2017-05-18 05:06:50                 & 2017-05-18 05:22:10                 &  920                                & Artesian Ave \& Hubbard St         & Wacker Dr \& Washington St         & Subscriber                          & Male                                & 1959                               \\
+	  360389                             & 2017-03-19 07:21:29                 & 2017-03-19 07:27:18                 &  349                                & Wabash Ave \& Roosevelt Rd         & Wells St \& Polk St                & Subscriber                          & Male                                & 1987                               \\
+	  858496                             & 2017-05-16 17:03:24                 & 2017-05-16 17:31:12                 & 1668                                & Ashland Ave \& Harrison St         & Wells St \& Concord Ln             & Subscriber                          & Male                                & 1963                               \\
+	  777620                             & 2017-05-10 08:53:03                 & 2017-05-10 08:54:32                 &   89                                & Western Ave \& Leland Ave          & Western Ave \& Leland Ave          & Subscriber                          & Male                                & 1977                               \\
+	 1230561                           & 2017-06-11 14:52:13               & 2017-06-11 15:42:33               & 3020                              & Waba                              &                                   &                                   &                                   &   NA                             \\
+\end{tabular}
+
+\item[\$`New York`] \begin{tabular}{r|lllllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type & Gender & Birth.Year\\
+\hline
+	 5688089                          & 2017-06-11 14:55:05              & 2017-06-11 15:08:21              &  795                             & Suffolk St \& Stanton St        & W Broadway \& Spring St         & Subscriber                       & Male                             & 1998                            \\
+	 4096714                          & 2017-05-11 15:30:11              & 2017-05-11 15:41:43              &  692                             & Lexington Ave \& E 63 St        & 1 Ave \& E 78 St                & Subscriber                       & Male                             & 1981                            \\
+	 2173887                          & 2017-03-29 13:26:26              & 2017-03-29 13:48:31              & 1325                             & 1 Pl \& Clinton St              & Henry St \& Degraw St           & Subscriber                       & Male                             & 1987                            \\
+	 3945638                          & 2017-05-08 19:47:18              & 2017-05-08 19:59:01              &  703                             & Barrow St \& Hudson St          & W 20 St \& 8 Ave                & Subscriber                       & Female                           & 1986                            \\
+	 6208972                          & 2017-06-21 07:49:16              & 2017-06-21 07:54:46              &  329                             & 1 Ave \& E 44 St                & E 53 St \& 3 Ave                & Subscriber                       & Male                             & 1992                            \\
+	 1285652                          & 2017-02-22 18:55:24              & 2017-02-22 19:12:03              &  998                             & State St \& Smith St            & Bond St \& Fulton St            & Subscriber                       & Male                             & 1986                            \\
+	 1675753                          & 2017-03-06 16:22:53              & 2017-03-06 16:30:51              &  478                             & Front St \& Gold St             & Lafayette Ave \& Fort Greene Pl & Subscriber                       & Male                             & 1982                            \\
+	 1692245                          & 2017-03-07 07:42:24              & 2017-03-07 08:49:42              & 4038                             & E 89 St \& York Ave             & Broadway \& Battery Pl          & Subscriber                       & Male                             & 1984                            \\
+	 2271331                          & 2017-04-02 08:02:36              & 2017-04-02 09:28:08              & 5132                             & Central Park S \& 6 Ave         & Central Park S \& 6 Ave         & Customer                         &                                  &   NA                            \\
+	 1558339                          & 2017-03-01 23:01:31              & 2017-03-01 23:06:41              &  309                             & E 3 St \& 1 Ave                 & E 25 St \& 2 Ave                & Subscriber                       & Male                             & 1992                            \\
+	 2287178                          & 2017-04-02 14:37:20              & 2017-04-02 14:56:12              & 1131                             & Bank St \& Washington St        & Little West St \& 1 Pl          & Customer                         &                                  &   NA                            \\
+	 2744874                          & 2017-04-13 13:40:39              & 2017-04-13 13:45:59              &  319                             & Front St \& Maiden Ln           & Liberty St \& Broadway          & Subscriber                       & Male                             & 1955                            \\
+	 3398180                          & 2017-04-27 23:27:31              & 2017-04-28 00:05:53              & 2301                             & E 10 St \& 5 Ave                & Columbus Ave \& W 72 St         & Subscriber                       & Male                             & 1971                            \\
+	  991609                          & 2017-02-13 15:40:53              & 2017-02-13 16:00:26              & 1172                             & 1 Ave \& E 68 St                & E 47 St \& Park Ave             & Subscriber                       & Male                             & 1993                            \\
+	 1512596                          & 2017-02-28 19:26:43              & 2017-02-28 19:35:21              &  518                             & N 11 St \& Wythe Ave            & Bushwick Ave \& Powers St       & Subscriber                       & Male                             & 1983                            \\
+	  187466                          & 2017-01-11 11:30:30              & 2017-01-11 11:35:15              &  285                             & E 17 St \& Broadway             & W 17 St \& 8 Ave                & Subscriber                       & Male                             & 1972                            \\
+	 2195658                          & 2017-03-29 20:19:44              & 2017-03-29 20:24:07              &  263                             & State St \& Smith St            & Johnson St \& Gold St           & Subscriber                       & Male                             & 1982                            \\
+	 6388534                          & 2017-06-23 21:21:59              & 2017-06-23 21:30:45              &  525                             & E 2 St \& Avenue C              & E 11 St \& 2 Ave                & Subscriber                       & Female                           & 1997                            \\
+	 4733837                          & 2017-05-24 08:53:32              & 2017-05-24 09:04:30              &  658                             & Central Park West \& W 76 St    & E 72 St \& York Ave             & Subscriber                       & Male                             & 1979                            \\
+	    5857                          & 2017-01-01 13:32:39              & 2017-01-01 13:49:57              & 1038                             & W 22 St \& 8 Ave                & W 45 St \& 6 Ave                & Customer                         &                                  &   NA                            \\
+	 1132766                          & 2017-02-18 13:29:08              & 2017-02-18 13:30:31              &   82                             & E 71 St \& 1 Ave                & 1 Ave \& E 68 St                & Subscriber                       & Male                             & 1983                            \\
+	 3358474                          & 2017-04-27 09:44:35              & 2017-04-27 09:48:00              &  204                             & University Pl \& E 14 St        & Washington Pl \& Broadway       & Subscriber                       & Male                             & 1988                            \\
+	 1778858                          & 2017-03-09 11:15:39              & 2017-03-09 11:29:03              &  803                             & E 25 St \& 2 Ave                & Suffolk St \& Stanton St        & Subscriber                       & Female                           & 1978                            \\
+	 2497952                          & 2017-04-08 13:39:48              & 2017-04-08 14:04:24              & 1476                             & Dean St \& Hoyt St              & Plaza St West \& Flatbush Ave   & Customer                         &                                  &   NA                            \\
+	 2905932                          & 2017-04-16 17:36:06              & 2017-04-16 18:02:52              & 1605                             & Allen St \& Stanton St          & Mott St \& Prince St            & Subscriber                       & Male                             & 1983                            \\
+	 3123311                          & 2017-04-21 09:41:14              & 2017-04-21 09:48:36              &  441                             & Lexington Ave \& E 63 St        & 1 Ave \& E 68 St                & Subscriber                       & Female                           & 1965                            \\
+	 2959550                          & 2017-04-17 18:27:23              & 2017-04-17 18:56:33              & 1750                             & NYCBS Depot - SSP                & Columbia St \& Degraw St        & Subscriber                       & Male                             & 1975                            \\
+	 2067887                          & 2017-03-25 12:02:11              & 2017-03-25 12:08:44              &  393                             & W 26 St \& 8 Ave                & W 38 St \& 8 Ave                & Subscriber                       & Female                           & 1960                            \\
+	 3518426                          & 2017-04-29 23:58:44              & 2017-04-30 00:02:19              &  215                             & Great Jones St                   & Mott St \& Prince St            & Subscriber                       & Male                             & 1986                            \\
+	 5383277                          & 2017-06-06 11:23:30              & 2017-06-06 11:26:56              &  205                             & W 43 St \& 10 Ave               & 9 Ave \& W 45 St                & Subscriber                       & Male                             & 1951                            \\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	 4203558                       & 2017-05-14 13:58:01           & 2017-05-14 14:39:38           & 2496                          & S 3 St \& Bedford Ave        & 3 St \& Prospect Park West   & Subscriber                    & Male                          & 1985                         \\
+	 5352804                       & 2017-06-05 17:44:35           & 2017-06-05 17:48:44           &  249                          & Vesey Pl \& River Terrace    & Greenwich St \& Hubert St    & Subscriber                    & Male                          & 1968                         \\
+	 3532080                       & 2017-04-30 12:22:15           & 2017-04-30 12:45:56           & 1420                          & Barrow St \& Hudson St       & Little West St \& 1 Pl       & Subscriber                    & Male                          & 1957                         \\
+	 2935863                       & 2017-04-17 11:50:15           & 2017-04-17 11:59:08           &  533                          & 9 Ave \& W 28 St             & W 15 St \& 7 Ave             & Subscriber                    & Male                          & 1950                         \\
+	 6156169                       & 2017-06-20 11:06:16           & 2017-06-20 11:12:40           &  383                          & 9 Ave \& W 18 St             & W 21 St \& 6 Ave             & Subscriber                    & Male                          & 1987                         \\
+	  250989                       & 2017-01-13 07:37:50           & 2017-01-13 07:44:16           &  386                          & Maiden Ln \& Pearl St        & Centre St \& Worth St        & Subscriber                    & Male                          & 1958                         \\
+	 1275463                       & 2017-02-22 16:00:25           & 2017-02-22 16:05:41           &  315                          & Greenwich St \& Hubert St    & Vesey Pl \& River Terrace    & Subscriber                    & Male                          & 1981                         \\
+	 3161273                       & 2017-04-22 10:03:26           & 2017-04-22 10:07:12           &  226                          & E 10 St \& Avenue A          & E 3 St \& 1 Ave              & Subscriber                    & Male                          & 1960                         \\
+	 4211314                       & 2017-05-14 16:18:42           & 2017-05-14 16:35:23           & 1001                          & Scholes St \& Manhattan Ave  & S 3 St \& Bedford Ave        & Subscriber                    & Female                        & 1991                         \\
+	 1717314                       & 2017-03-07 21:15:14           & 2017-03-07 21:26:37           &  682                          & Lexington Ave \& E 24 St     & Greenwich Ave \& 8 Ave       & Subscriber                    & Female                        & 1980                         \\
+	 1881529                       & 2017-03-13 21:21:15           & 2017-03-13 21:37:33           &  978                          & 1 Ave \& E 16 St             & Canal St \& Rutgers St       & Subscriber                    & Female                        & 1990                         \\
+	 1047928                       & 2017-02-15 13:40:07           & 2017-02-15 13:47:07           &  420                          & E 30 St \& Park Ave S        & W 33 St \& 7 Ave             & Subscriber                    & Male                          & 1990                         \\
+	 5623210                       & 2017-06-10 12:31:08           & 2017-06-10 12:56:57           & 1549                          & West End Ave \& W 94 St      & 12 Ave \& W 40 St            & Subscriber                    & Male                          & 1978                         \\
+	 3197884                       & 2017-04-23 10:54:11           & 2017-04-23 10:59:17           &  306                          & W 20 St \& 8 Ave             & Broadway \& E 22 St          & Subscriber                    & Male                          & 1974                         \\
+	 5758780                       & 2017-06-12 18:45:44           & 2017-06-12 19:12:48           & 1623                          & W 16 St \& The High Line     & W 16 St \& The High Line     & Subscriber                    & Female                        & 1981                         \\
+	 5082390                       & 2017-05-31 22:00:22           & 2017-05-31 22:04:03           &  221                          & Sullivan St \& Washington Sq & Great Jones St                & Subscriber                    & Male                          & 1991                         \\
+	 2521938                       & 2017-04-09 07:34:19           & 2017-04-09 07:54:57           & 1238                          & 5 Ave \& E 88 St             & Amsterdam Ave \& W 79 St     & Subscriber                    & Male                          & 1978                         \\
+	 3759176                       & 2017-05-04 12:03:54           & 2017-05-04 12:14:50           &  655                          & Broadway \& W 36 St          & E 17 St \& Broadway          & Subscriber                    & Female                        & 1964                         \\
+	  246004                      & 2017-01-12 21:42:18          & 2017-01-12 21:51:14          &  536                         & Pier 40 - Hudson River Park  & Franklin St \& W Broadway   & Subscriber                   & Male                         & 1965                        \\
+	 1951636                       & 2017-03-21 16:27:03           & 2017-03-21 16:41:04           &  841                          & 6 Ave \& Canal St            & W 31 St \& 7 Ave             & Subscriber                    & Male                          & 1976                         \\
+	 6227477                       & 2017-06-21 12:44:04           & 2017-06-21 13:09:09           & 1505                          & W 49 St \& 8 Ave             & South End Ave \& Liberty St  & Subscriber                    & Male                          & 1982                         \\
+	 6309606                       & 2017-06-22 17:09:31           & 2017-06-22 17:18:06           &  514                          & Barclay St \& Church St      & South End Ave \& Liberty St  & Subscriber                    & Male                          & 1976                         \\
+	 5532367                       & 2017-06-08 19:59:16           & 2017-06-08 20:06:48           &  451                          & Broadway \& E 22 St          & E 12 St \& 3 Ave             & Subscriber                    & Male                          & 1982                         \\
+	 5517974                       & 2017-06-08 17:29:01           & 2017-06-08 17:35:50           &  408                          & Broadway \& W 41 St          & W 47 St \& 10 Ave            & Subscriber                    & Male                          & 1980                         \\
+	 1293888                       & 2017-02-23 06:14:14           & 2017-02-23 06:23:32           &  558                          & E 27 St \& 1 Ave             & E 47 St \& Park Ave          & Subscriber                    & Male                          & 1984                         \\
+	  642855                       & 2017-01-28 16:44:18           & 2017-01-28 16:48:18           &  240                          & W 52 St \& 9 Ave             & 9 Ave \& W 45 St             & Subscriber                    & Male                          & 1991                         \\
+	 2157959                       & 2017-03-29 06:30:35           & 2017-03-29 06:32:41           &  125                          & W 84 St \& Columbus Ave      & W 87 St  \& Amsterdam Ave    & Subscriber                    & Male                          & 1984                         \\
+	 5679624                       & 2017-06-11 12:52:27           & 2017-06-11 12:58:35           &  367                          & 8 Ave \& W 33 St             & W 45 St \& 8 Ave             & Subscriber                    & Male                          & 1954                         \\
+	 6762960                       & 2017-06-30 07:48:34           & 2017-06-30 08:17:16           & 1722                          & Cathedral Pkwy \& Broadway   & Broadway \& W 51 St          & Subscriber                    & Male                          & 1974                         \\
+	 6078570                     & 2017-06-18 16:20:21         & 201                         &   NA                        &                             &                             &                             &                             &   NA                       \\
+\end{tabular}
+
+\item[\$Washington] \begin{tabular}{r|lllllll}
+ X & Start.Time & End.Time & Trip.Duration & Start.Station & End.Station & User.Type\\
+\hline
+	 1621326                                                 & 2017-06-21 08:36:34                                     & 2017-06-21 08:44:43                                     &  489.066                                                & 14th \& Belmont St NW                                  & 15th \& K St NW                                        & Subscriber                                             \\
+	  482740                                                 & 2017-03-11 10:40:00                                     & 2017-03-11 10:46:00                                     &  402.549                                                & Yuma St \& Tenley Circle NW                            & Connecticut Ave \& Yuma St NW                          & Subscriber                                             \\
+	 1330037                                                 & 2017-05-30 01:02:59                                     & 2017-05-30 01:13:37                                     &  637.251                                                & 17th St \& Massachusetts Ave NW                        & 5th \& K St NW                                         & Subscriber                                             \\
+	  665458                                                 & 2017-04-02 07:48:35                                     & 2017-04-02 08:19:03                                     & 1827.341                                                & Constitution Ave \& 2nd St NW/DOL                      & M St \& Pennsylvania Ave NW                            & Customer                                               \\
+	 1481135                                                 & 2017-06-10 08:36:28                                     & 2017-06-10 09:02:17                                     & 1549.427                                                & Henry Bacon Dr \& Lincoln Memorial Circle NW           & Maine Ave \& 7th St SW                                 & Subscriber                                             \\
+	 1148202                                                 & 2017-05-14 07:18:18                                     & 2017-05-14 07:24:56                                     &  398.000                                                & 1st \& K St SE                                         & Eastern Market Metro / Pennsylvania Ave \& 7th St SE   & Subscriber                                             \\
+	 1594275                                                 & 2017-06-19 08:41:43                                     & 2017-06-19 09:00:08                                     & 1105.429                                                & Park Rd \& Holmead Pl NW                               & 8th \& H St NW                                         & Subscriber                                             \\
+	 1601832                                                 & 2017-06-20 05:54:42                                     & 2017-06-20 06:05:18                                     &  636.218                                                & 1st \& D St SE                                         & Potomac \& Pennsylvania Ave SE                         & Subscriber                                             \\
+	  574182                                                 & 2017-03-24 20:37:00                                     & 2017-03-24 20:42:00                                     &  328.530                                                & 18th \& R St NW                                        & 15th \& P St NW                                        & Subscriber                                             \\
+	  327058                                                 & 2017-02-20 21:12:00                                     & 2017-02-20 21:31:00                                     & 1188.090                                                & 17th \& Corcoran St NW                                 & Lynn \& 19th St North                                  & Subscriber                                             \\
+	  854729                                                 & 2017-04-17 02:50:51                                     & 2017-04-17 03:05:17                                     &  866.689                                                & 37th \& O St NW / Georgetown University                & 37th \& O St NW / Georgetown University                & Customer                                               \\
+	  721887                                                 & 2017-04-08 01:12:48                                     & 2017-04-08 01:52:33                                     & 2385.411                                                & 10th \& G St NW                                        & 5th St \& Massachusetts Ave NW                         & Customer                                               \\
+	  143181                                                 & 2017-01-26 20:01:00                                     & 2017-01-26 20:17:00                                     &  951.457                                                & 10th St \& L'Enfant Plaza SW                           & 1st \& Rhode Island Ave NW                             & Subscriber                                             \\
+	   26953                                                 & 2017-01-06 17:36:00                                     & 2017-01-06 17:43:00                                     &  448.628                                                & North Capitol St \& F St NW                            & 1st \& M St NE                                         & Subscriber                                             \\
+	 1308542                                               & 2017-05-28 03:50:26                                   & 2017-05-28 04:24:26                                   & 2039.472                                              & Henry Bacon Dr \& Lincoln Memorial Circle NW         & Lincoln Memorial                                      & Customer                                             \\
+	 1592744                                                 & 2017-06-19 07:46:35                                     & 2017-06-19 07:55:00                                     &  505.482                                                & Metro Center / 12th \& G St NW                         & North Capitol St \& G Pl NE                            & Subscriber                                             \\
+	 1139713                                                 & 2017-05-13 11:29:16                                     & 2017-05-13 11:55:47                                     & 1591.326                                                & 16th \& Harvard St NW                                  & New York Ave \& 15th St NW                             & Customer                                               \\
+	 1478516                                                 & 2017-06-10 06:04:41                                     & 2017-06-10 06:32:33                                     & 1672.075                                                & 17th St \& Massachusetts Ave NW                        & 15th \& East Capitol St NE                             & Subscriber                                             \\
+	  679837                                                 & 2017-04-03 10:22:19                                     & 2017-04-03 10:26:11                                     &  231.952                                                & 20th \& Crystal Dr                                     & 6th \& S Ball St                                       & Subscriber                                             \\
+	 1392498                                                 & 2017-06-03 11:42:54                                     & 2017-06-03 12:21:05                                     & 2291.454                                                & 22nd \& I St NW / Foggy Bottom                         & Lamont \& Mt Pleasant NW                               & Customer                                               \\
+	  746605                                                 & 2017-04-09 11:05:42                                     & 2017-04-09 11:26:44                                     & 1261.363                                                & Henry Bacon Dr \& Lincoln Memorial Circle NW           & Smithsonian-National Mall / Jefferson Dr \& 12th St SW & Customer                                               \\
+	  868881                                               & 2017-04-18 05:42:04                                   & 2017-04-18 06:31:28                                   & 2964.818                                              & Anacostia Metro                                       & Congress Heights Metro                                & Subscriber                                           \\
+	 1161275                                                 & 2017-05-15 07:35:21                                     & 2017-05-15 07:49:06                                     &  825.590                                                & 3rd \& H St NE                                         & Oklahoma Ave \& D St NE                                & Subscriber                                             \\
+	  305000                                                 & 2017-02-19 00:43:00                                     & 2017-02-19 00:46:00                                     &  226.006                                                & 18th St \& Wyoming Ave NW                              & Calvert St \& Woodley Pl NW                            & Subscriber                                             \\
+	 1174029                                                 & 2017-05-16 07:34:43                                     & 2017-05-16 07:50:04                                     &  920.840                                                & Florida Ave \& R St NW                                 & L'Enfant Plaza / 7th \& C St SW                        & Subscriber                                             \\
+	 1157984                                                 & 2017-05-15 05:39:22                                     & 2017-05-15 06:02:14                                     & 1371.512                                                & Lincoln Memorial                                        & Arlington Blvd \& Fillmore St                          & Subscriber                                             \\
+	  694527                                                 & 2017-04-05 01:36:31                                     & 2017-04-05 01:40:45                                     &  254.076                                                & 13th St \& New York Ave NW                             & 11th \& M St NW                                        & Subscriber                                             \\
+	  228536                                                 & 2017-02-08 09:17:00                                     & 2017-02-08 09:31:00                                     &  834.780                                                & 39th \& Calvert St NW / Stoddert                       & Massachusetts Ave \& Dupont Circle NW                  & Subscriber                                             \\
+	  669432                                                 & 2017-04-02 12:11:35                                     & 2017-04-02 02:15:22                                     & 7427.749                                                & 2nd St \& Massachusetts Ave NE                         & 2nd St \& Massachusetts Ave NE                         & Customer                                               \\
+	 1036255                                               & 2017-05-02 11:49:43                                   & 2017-05-02 12:09:09                                   & 1165.698                                              & 10th \& K St NW                                      & Georgetown Harbor / 30th St NW                        & Subscriber                                           \\
+	 ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	  676408                                            & 2017-04-03 07:03:02                                & 2017-04-03 07:16:01                                &  779.371                                           & 10th \& K St NW                                   & 17th \& Corcoran St NW                            & Subscriber                                        \\
+	  551347                                            & 2017-03-22 09:30:00                                & 2017-03-22 09:34:00                                &  275.761                                           & Offutt Ln \& Chevy Chase Dr                       & Bethesda Ave \& Arlington Rd                      & Subscriber                                        \\
+	  905153                                          & 2017-04-21 04:39:43                              & 2017-04-21 04:47:19                              &  456.235                                         & 3rd \& G St SE                                  & Columbus Circle / Union Station                  & Subscriber                                      \\
+	  625949                                            & 2017-03-29 15:39:00                                & 2017-03-29 16:23:00                                & 2692.475                                           & Columbus Circle / Union Station                    & Washington \& Independence Ave SW/HHS             & Subscriber                                        \\
+	 1667242                                            & 2017-06-25 02:03:23                                & 2017-06-25 02:07:28                                &  244.334                                           & 13th St \& New York Ave NW                        & 11th \& M St NW                                   & Subscriber                                        \\
+	  241483                                            & 2017-02-09 21:14:00                                & 2017-02-09 21:22:00                                &  468.211                                           & Braddock Rd Metro                                  & Mount Vernon Ave \& E Del Ray Ave                 & Subscriber                                        \\
+	  893870                                            & 2017-04-20 05:32:02                                & 2017-04-20 05:41:26                                &  564.069                                           & 1st \& O St NW                                    & 8th \& H St NW                                    & Subscriber                                        \\
+	 1673660                                            & 2017-06-25 07:58:00                                & 2017-06-25 08:40:40                                & 2560.164                                           & Ballston Metro / N Stuart \& 9th St N             & Ballston Metro / N Stuart \& 9th St N             & Subscriber                                        \\
+	  531841                                            & 2017-03-20 11:44:00                                & 2017-03-20 11:56:00                                &  707.024                                           & 18th \& M St NW                                   & Metro Center / 12th \& G St NW                    & Subscriber                                        \\
+	 1143611                                            & 2017-05-14 03:06:09                                & 2017-05-14 03:39:27                                & 1997.738                                           & 4th \& C St SW                                    & 4th \& M St SW                                    & Customer                                          \\
+	  760548                                            & 2017-04-10 09:49:09                                & 2017-04-10 10:08:06                                & 1136.869                                           & Jefferson Dr \& 14th St SW                        & 4th St \& Madison Dr NW                           & Customer                                          \\
+	  585303                                            & 2017-03-25 16:15:00                                & 2017-03-25 17:02:00                                & 2817.361                                           & Jefferson Dr \& 14th St SW                        & New York Ave \& 15th St NW                        & Subscriber                                        \\
+	  774610                                            & 2017-04-11 09:01:58                                & 2017-04-11 09:10:36                                &  518.196                                           & 7th \& E St SW                                    & 6th St \& Indiana Ave NW                          & Subscriber                                        \\
+	 1681261                                            & 2017-06-26 03:39:32                                & 2017-06-26 03:53:08                                &  815.682                                           & 4th \& East Capitol St NE                         & 4th St \& Madison Dr NW                           & Customer                                          \\
+	 1068808                                          & 2017-05-05 12:32:12                              & 2017-05-05 12:38:13                              &  360.841                                         & Good Hope Rd \& MLK Ave SE                      & Anacostia Metro                                  & Subscriber                                      \\
+	  385427                                          & 2017-02-27 07:03:00                              & 2017-02-27 07:12:00                              &  543.352                                         & Alabama \& MLK Ave SE                           & Anacostia Metro                                  & Subscriber                                      \\
+	  242173                                            & 2017-02-10 07:39:00                                & 2017-02-10 07:48:00                                &  577.966                                           & 20th St \& Florida Ave NW                         & New Hampshire Ave \& 24th St NW                   & Subscriber                                        \\
+	  982818                                              & 2017-04-28 11:03:05                                  & 2017-04-28 11:26:11                                  & 1385.731                                             & Lincoln Memorial                                     & Ohio Dr \& West Basin Dr SW / MLK \& FDR Memorials & Customer                                            \\
+	 1742606                                            & 2017-06-30 05:59:23                                & 2017-06-30 06:20:17                                & 1253.775                                           & Lincoln Memorial                                   & 17th \& G St NW                                   & Customer                                          \\
+	 1583466                                            & 2017-06-18 08:44:33                                & 2017-06-18 08:51:31                                &  417.479                                           & Maine Ave \& 7th St SW                            & 1st \& K St SE                                    & Subscriber                                        \\
+	 1500573                                            & 2017-06-12 03:36:53                                & 2017-06-12 03:55:17                                & 1104.388                                           & 5th \& F St NW                                    & 10th \& G St NW                                   & Subscriber                                        \\
+	   45867                                          & 2017-01-11 13:50:00                              & 2017-01-11 14:14:00                              & 1474.546                                         & USDA / 12th \& Independence Ave SW              & Jefferson Memorial                               & Subscriber                                      \\
+	 1534964                                            & 2017-06-14 09:33:25                                & 2017-06-14 09:49:43                                &  978.056                                           & 10th \& K St NW                                   & 8th \& East Capitol St NE                         & Subscriber                                        \\
+	 1371409                                            & 2017-06-02 06:02:14                                & 2017-06-02 06:14:27                                &  732.245                                           & Columbus Circle / Union Station                    & L'Enfant Plaza / 7th \& C St SW                   & Customer                                          \\
+	 1484340                                            & 2017-06-10 10:58:09                                & 2017-06-10 11:25:58                                & 1669.700                                           & M St \& New Jersey Ave SE                         & 4th St \& Madison Dr NW                           & Customer                                          \\
+	  555788                                            & 2017-03-22 18:46:00                                & 2017-03-22 19:04:00                                & 1082.789                                           & 8th \& H St NW                                    & 21st \& I St NW                                   & Subscriber                                        \\
+	  739004                                          & 2017-04-09 04:00:22                              & 2017-04-09 04:09:54                              &  571.879                                         & Eckington Pl \& Q St NE                         & Columbus Circle / Union Station                  & Subscriber                                      \\
+	 1214907                                            & 2017-05-19 09:00:53                                & 2017-05-19 09:07:38                                &  404.152                                           & 1st \& M St NE                                    & 1st \& Rhode Island Ave NW                        & Subscriber                                        \\
+	 1419806                                          & 2017-06-06 04:27:33                              & 2017-06-06 04:49:59                              & 1345.911                                         & 10th \& Florida Ave NW                          & Georgetown Harbor / 30th St NW                   & Customer                                        \\
+	     132                                          &                                                  &                                                  &       NA                                         &                                                  &                                                  &                                                 \\
+\end{tabular}
+
+\end{description}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}Summary statistics for each dataset}
+        \PY{n+nf}{sapply}\PY{p}{(}\PY{n+nf}{list}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Chicago\PYZdq{}} \PY{o}{=} \PY{n}{chi}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{New York\PYZdq{}} \PY{o}{=} \PY{n}{ny}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Washington\PYZdq{}}  \PY{o}{=}  \PY{n}{wash}\PY{p}{)}\PY{p}{,} \PY{n}{summary}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+$Chicago
+       X                         Start.Time                  End.Time   
+ Min.   :     36   2017-01-24 07:40:32:   2   2017-04-16 13:16:52:   2  
+ 1st Qu.: 386722   2017-04-22 13:16:25:   2   2017-04-26 16:29:26:   2  
+ Median : 773554   2017-05-27 15:17:50:   2   2017-05-21 16:20:56:   2  
+ Mean   : 776721   2017-06-10 13:29:41:   2   2017-05-27 09:58:21:   2  
+ 3rd Qu.:1171266   2017-06-20 17:05:11:   2   2017-06-25 14:51:35:   2  
+ Max.   :1551248   2017-06-21 13:18:52:   2   2017-01-01 00:46:32:   1  
+                   (Other)            :8618   (Other)            :8619  
+ Trip.Duration                          Start.Station 
+ Min.   :   60.0   Streeter Dr & Grand Ave     : 210  
+ 1st Qu.:  394.2   Lake Shore Dr & Monroe St   : 140  
+ Median :  670.0   Clinton St & Washington Blvd: 120  
+ Mean   :  937.2   Clinton St & Madison St     : 102  
+ 3rd Qu.: 1119.0   Canal St & Adams St         : 101  
+ Max.   :85408.0   Michigan Ave & Oak St       :  98  
+                   (Other)                     :7859  
+                       End.Station        User.Type       Gender    
+ Streeter Dr & Grand Ave     : 233             :   1         :1748  
+ Clinton St & Madison St     : 145   Customer  :1746   Female:1723  
+ Theater on the Lake         : 131   Subscriber:6883   Male  :5159  
+ Lake Shore Dr & Monroe St   : 115                                  
+ Clinton St & Washington Blvd: 109                                  
+ Lake Shore Dr & North Blvd  : 102                                  
+ (Other)                     :7795                                  
+   Birth.Year  
+ Min.   :1899  
+ 1st Qu.:1975  
+ Median :1984  
+ Mean   :1981  
+ 3rd Qu.:1989  
+ Max.   :2002  
+ NA's   :1747  
+
+$`New York`
+       X                         Start.Time                   End.Time    
+ Min.   :     47   2017-05-11 18:26:10:    3   2017-01-03 08:54:10:    2  
+ 1st Qu.:1712425   2017-01-04 13:58:24:    2   2017-01-04 17:21:55:    2  
+ Median :3418634   2017-01-09 09:36:01:    2   2017-01-05 17:25:17:    2  
+ Mean   :3415873   2017-01-21 15:36:56:    2   2017-01-12 08:34:01:    2  
+ 3rd Qu.:5123382   2017-01-21 17:49:59:    2   2017-01-12 09:41:54:    2  
+ Max.   :6816152   2017-01-21 20:08:29:    2   2017-01-12 20:34:42:    2  
+                   (Other)            :54757   (Other)            :54758  
+ Trip.Duration                     Start.Station  
+ Min.   :     61.0   Pershing Square North:  592  
+ 1st Qu.:    368.0   W 21 St & 6 Ave      :  385  
+ Median :    610.0   Broadway & E 22 St   :  383  
+ Mean   :    903.6   E 17 St & Broadway   :  380  
+ 3rd Qu.:   1051.0   West St & Chambers St:  364  
+ Max.   :1088634.0   W 20 St & 11 Ave     :  329  
+ NA's   :1           (Other)              :52337  
+                End.Station         User.Type        Gender        Birth.Year  
+ Pershing Square North:  556             :  119         : 5410   Min.   :1885  
+ E 17 St & Broadway   :  445   Customer  : 5558   Female:12159   1st Qu.:1970  
+ Broadway & E 22 St   :  427   Subscriber:49093   Male  :37201   Median :1981  
+ W 21 St & 6 Ave      :  365                                     Mean   :1978  
+ W 20 St & 11 Ave     :  344                                     3rd Qu.:1988  
+ W 38 St & 8 Ave      :  338                                     Max.   :2001  
+ (Other)              :52295                                     NA's   :5218  
+
+$Washington
+       X                         Start.Time                   End.Time    
+ Min.   :      7   2017-02-19 12:19:00:    6   2017-03-09 17:54:00:    7  
+ 1st Qu.: 434587   2017-02-20 11:35:00:    6   2017-03-28 18:11:00:    7  
+ Median : 872858   2017-02-24 17:46:00:    6   2017-01-13 17:48:00:    6  
+ Mean   : 873881   2017-03-01 08:20:00:    6   2017-01-31 08:49:00:    6  
+ 3rd Qu.:1313305   2017-03-02 08:39:00:    6   2017-02-13 18:09:00:    6  
+ Max.   :1751392   2017-03-09 17:31:00:    6   2017-02-20 11:38:00:    6  
+                   (Other)            :89015   (Other)            :89013  
+ Trip.Duration                                   Start.Station  
+ Min.   :    60.3   Columbus Circle / Union Station     : 1700  
+ 1st Qu.:   410.9   Lincoln Memorial                    : 1546  
+ Median :   707.0   Jefferson Dr & 14th St SW           : 1488  
+ Mean   :  1234.0   Massachusetts Ave & Dupont Circle NW: 1219  
+ 3rd Qu.:  1233.2   Jefferson Memorial                  : 1068  
+ Max.   :904591.4   15th & P St NW                      : 1040  
+ NA's   :1          (Other)                             :80990  
+                                                End.Station   
+ Columbus Circle / Union Station                      : 1767  
+ Jefferson Dr & 14th St SW                            : 1603  
+ Lincoln Memorial                                     : 1514  
+ Massachusetts Ave & Dupont Circle NW                 : 1344  
+ Smithsonian-National Mall / Jefferson Dr & 12th St SW: 1103  
+ 15th & P St NW                                       : 1077  
+ (Other)                                              :80643  
+      User.Type    
+           :    1  
+ Customer  :23450  
+ Subscriber:65600  
+                   
+                   
+                   
+                   
+
+    \end{verbatim}
+
+    
+    \hypertarget{question-1}{%
+\subsubsection{Question 1}\label{question-1}}
+
+What months are the busiest for each city?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Your solution code goes here}
+\end{Verbatim}
+
+
+    The as.Date function is used to convert the values in the Start.Time
+column to dates. The months function is used to extract the month names
+from the dates. The abbreviate argument is set to TRUE, which means that
+the month names will be abbreviated (e.g., ``Jan'' for January). The
+month names are then assigned to the months column in each of the data
+frames using the assignment operator \textless{}-.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}The as.Date function is used to convert the values in the Start.Time column to dates. }
+         \PY{c+c1}{\PYZsh{}The months function is used to extract the month names from the dates. }
+         \PY{c+c1}{\PYZsh{}The abbreviate argument is set to TRUE, which means that the month names will be abbreviated (e.g., \PYZdq{}Jan\PYZdq{} for January). }
+         \PY{c+c1}{\PYZsh{}The month names are then assigned to the months column in each of the data frames using the assignment operator \PYZlt{}\PYZhy{}.}
+         \PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{months}\PY{p}{(}\PY{n+nf}{as.Date}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{Start.Time}\PY{p}{)}\PY{p}{,} \PY{n}{abbreviate}\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+         \PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{months}\PY{p}{(}\PY{n+nf}{as.Date}\PY{p}{(}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{Start.Time}\PY{p}{)}\PY{p}{,} \PY{n}{abbreviate}\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+         \PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{months}\PY{p}{(}\PY{n+nf}{as.Date}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{Start.Time}\PY{p}{)}\PY{p}{,} \PY{n}{abbreviate}\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{}Creates labels for the columns}
+         \PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{factor}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{,} \PY{n}{levels} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Jan\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Feb\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Mar\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Apr\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{May\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Jun\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{factor}\PY{p}{(}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{,} \PY{n}{levels} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Jan\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Feb\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Mar\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Apr\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{May\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Jun\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{months} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{factor}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{,} \PY{n}{levels} \PY{o}{=} \PY{n+nf}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Jan\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Feb\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Mar\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Apr\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{May\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Jun\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}Creates table summary for New York by month}
+         \PY{n+nf}{table}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+  Jan   Feb   Mar   Apr   May   Jun 
+ 5745  6364  5820 10661 12180 14000 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{}Creates table summary for Washington, DC by month}
+         \PY{n+nf}{table}\PY{p}{(}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+  Jan   Feb   Mar   Apr   May   Jun 
+ 8946 11563 12612 18522 17072 20335 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}Creates table summary for Chicago by month}
+         \PY{n+nf}{table}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+ Jan  Feb  Mar  Apr  May  Jun 
+ 650  930  803 1526 1905 2816 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{}Bar chart showing the Monthly Useage for New York City}
+         \PY{n}{ny\PYZus{}usage} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{ny}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+           \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Months\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Monthly Useage New York\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ny\PYZus{}usage}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{} Create the plot}
+         \PY{c+c1}{\PYZsh{}Note to reviewer. The wash dataset contains some null values which are visible in this plot}
+         \PY{c+c1}{\PYZsh{} I did not clean the null values as it is outside the scope of this assignment}
+         \PY{n}{wash\PYZus{}usage} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{wash}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+           \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Months\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Monthly Useage Washington, DC\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{wash\PYZus{}usage}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{chi\PYZus{}usage}  \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{chi}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{months}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+           \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Months\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Monthly Useage Chicago\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{chi\PYZus{}usage}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Summary of your question 1 results goes here.} For each city
+June was the busiest month for bike rentals. New York had 14,000 users
+in June, Washington, DC had 20,335 in June and Chicago had 2,816 in June
+
+    \hypertarget{question-2}{%
+\subsubsection{Question 2}\label{question-2}}
+
+What is the user breakdown of people renting bikes. Are they subscribers
+to the service or single ride customers?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Your solution code goes here}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n+nf}{table}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Customer Subscriber 
+       119       5558      49093 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n+nf}{prop.table}\PY{p}{(}\PY{n+nf}{table}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+               Customer  Subscriber 
+0.002172722 0.101478912 0.896348366 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{ny\PYZus{}users} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{ny}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Type\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Types New York\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ny\PYZus{}users}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n+nf}{table}\PY{p}{(}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Customer Subscriber 
+         0      23450      65600 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n+nf}{prop.table}\PY{p}{(}\PY{n+nf}{table}\PY{p}{(}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Customer Subscriber 
+ 0.0000000  0.2633352  0.7366648 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{wash\PYZus{}users} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{wash}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{wash}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Type\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Types Washington, DC\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{wash\PYZus{}users}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n+nf}{table}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Customer Subscriber 
+         1       1746       6883 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n+nf}{prop.table}\PY{p}{(}\PY{n+nf}{table}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+                 Customer   Subscriber 
+0.0001158749 0.2023174971 0.7975666280 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{chi\PYZus{}users} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{chi}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{User.Type}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Type\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{User Types Chicago\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{chi\PYZus{}users}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Summary of your question 2 results goes here.} For each city
+more subscribers than users rented bikes. In New York 3,558 were single
+ride customers and 49,093 were subscribers. There were 119 records
+without subscriber/customer information. In Washington, DC 23,450 were
+single ride customers and 65,600 were subscribers. There was one NA
+value. In Chicago 1746 were customers and 6883 were subscribers. There
+was one unknown value.
+
+    \hypertarget{question-3}{%
+\subsubsection{Question 3}\label{question-3}}
+
+What are the counts of each gender (only available for NYC and Chicago)?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Your solution code goes here}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n+nf}{table}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+       Female   Male 
+  5410  12159  37201 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n+nf}{prop.table}\PY{p}{(}\PY{n+nf}{table}\PY{p}{(}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Female      Male 
+0.0987767 0.2220011 0.6792222 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{ny\PYZus{}gender} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{ny}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{ny}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Gender\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Users by Gender New York\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ny\PYZus{}gender}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n+nf}{table}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+       Female   Male 
+  1748   1723   5159 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n+nf}{prop.table}\PY{p}{(}\PY{n+nf}{table}\PY{p}{(}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+             Female      Male 
+0.2025492 0.1996524 0.5977984 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{chi\PYZus{}gender} \PY{o}{\PYZlt{}\PYZhy{}} \PY{n+nf}{ggplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{chi}\PY{p}{,} \PY{n+nf}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{chi}\PY{o}{\PYZdl{}}\PY{n}{Gender}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 \PY{n+nf}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,} \PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7D9BCA\PYZdq{}}\PY{p}{)} \PY{o}{+}   \PY{n+nf}{geom\PYZus{}text}\PY{p}{(}
+             \PY{n}{stat} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{count\PYZdq{}}\PY{p}{,}
+             \PY{n+nf}{aes}\PY{p}{(}\PY{n}{label} \PY{o}{=} \PY{n}{..count..}\PY{p}{)}\PY{p}{,} \PY{n}{vjust} \PY{o}{=} \PY{l+m}{\PYZhy{}1}\PY{p}{,} 
+           \PY{p}{)} \PY{o}{+} 
+         \PY{n+nf}{labs}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Gender\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total Users\PYZdq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Users by Gender Chicago\PYZdq{}}\PY{p}{)} \PY{o}{+}
+         \PY{n+nf}{theme}\PY{p}{(}\PY{n}{panel.background} \PY{o}{=} \PY{n+nf}{element\PYZus{}rect}\PY{p}{(}\PY{n}{fill} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}f2f5f9\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{text} \PY{o}{=} \PY{n+nf}{element\PYZus{}text}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Black\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{chi\PYZus{}gender}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Summary of your question 3 results goes here.} In New York 37201
+users were male 12159 were female and 5410 had a unknown gender type
+(the dataset contained blank values) In Chicago 5159 users were male
+1723 were female and 1748 had a unknown gender type (the dataset
+contained blank values)
+
+    \hypertarget{finishing-up}{%
+\subsection{Finishing Up}\label{finishing-up}}
+
+\begin{quote}
+Congratulations! You have reached the end of the Explore Bikeshare Data
+Project. You should be very proud of all you have accomplished!
+\end{quote}
+
+\begin{quote}
+\textbf{Tip}: Once you are satisfied with your work here, check over
+your report to make sure that it is satisfies all the areas of the
+\href{https://review.udacity.com/\#!/rubrics/2508/view}{rubric}.
+\end{quote}
+
+\hypertarget{directions-to-submit}{%
+\subsection{Directions to Submit}\label{directions-to-submit}}
+
+\begin{quote}
+Before you submit your project, you need to create a .html or .pdf
+version of this notebook in the workspace here. To do that, run the code
+cell below. If it worked correctly, you should get a return code of 0,
+and you should see the generated .html file in the workspace directory
+(click on the orange Jupyter icon in the upper left).
+\end{quote}
+
+\begin{quote}
+Alternatively, you can download this report as .html via the
+\textbf{File} \textgreater{} \textbf{Download as} submenu, and then
+manually upload it into the workspace directory by clicking on the
+orange Jupyter icon in the upper left, then using the Upload button.
+\end{quote}
+
+\begin{quote}
+Once you've done this, you can submit your project by clicking on the
+``Submit Project'' button in the lower right here. This will create and
+submit a zip file with this .ipynb doc and the .html or .pdf version you
+created. Congratulations!
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nf}{system}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{python \PYZhy{}m nbconvert Explore\PYZus{}bikeshare\PYZus{}data.ipynb\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
